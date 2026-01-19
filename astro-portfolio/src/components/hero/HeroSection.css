@@ -1,0 +1,689 @@
+/* =============================================
+   HERO SECTION - FIFA CARD STYLES
+   ============================================= */
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 2000px;
+    padding: 40px 20px;
+    position: relative;
+}
+
+/* Hero ambient rings */
+.hero::before {
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    border-radius: 50%;
+    animation: heroRing 8s linear infinite;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    width: 800px;
+    height: 800px;
+    border: 1px dashed rgba(0, 200, 255, 0.05);
+    border-radius: 50%;
+    animation: heroRing 12s linear infinite reverse;
+}
+
+@keyframes heroRing {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.card-wrapper {
+    position: relative;
+    width: var(--card-width);
+    height: var(--card-height);
+    cursor: pointer;
+}
+
+/* Pack (Back of Card) */
+.pack {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: all 0.8s var(--transition-smooth);
+    z-index: 10;
+}
+
+.pack.revealed {
+    transform: rotateY(180deg) scale(0.8);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.pack-inner {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(165deg,
+            rgba(30, 30, 50, 0.9) 0%,
+            rgba(15, 15, 30, 0.95) 50%,
+            rgba(10, 10, 20, 1) 100%);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid rgba(212, 175, 55, 0.5);
+    box-shadow:
+        0 0 60px rgba(212, 175, 55, 0.3),
+        0 0 120px rgba(0, 200, 255, 0.1),
+        inset 0 0 80px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+}
+
+.pack-inner::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg,
+            var(--gold-primary),
+            transparent,
+            var(--cyan-accent),
+            transparent,
+            var(--gold-primary));
+    border-radius: 22px;
+    z-index: -1;
+    animation: borderRotate 4s linear infinite;
+    background-size: 400% 400%;
+}
+
+@keyframes borderRotate {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.pack-design {
+    text-align: center;
+}
+
+.pack-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.pack-icon {
+    font-size: 90px;
+    animation: packPulse 2s infinite;
+    filter: drop-shadow(0 0 30px var(--gold-primary));
+}
+
+@keyframes packPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 20px var(--gold-primary));
+    }
+
+    50% {
+        transform: scale(1.15);
+        filter: drop-shadow(0 0 50px var(--gold-light)) drop-shadow(0 0 80px var(--cyan-accent));
+    }
+}
+
+.pack-text {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: 12px;
+    background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-primary) 50%, var(--gold-dark) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.5));
+}
+
+.pack-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    transform: translate(-50%, -50%);
+    background:
+        radial-gradient(circle, rgba(212, 175, 55, 0.2) 0%, transparent 40%),
+        radial-gradient(circle at 30% 30%, rgba(0, 200, 255, 0.1) 0%, transparent 30%);
+    opacity: 0.6;
+    animation: glowPulse 3s infinite;
+}
+
+@keyframes glowPulse {
+
+    0%,
+    100% {
+        opacity: 0.4;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    50% {
+        opacity: 0.7;
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+}
+
+.click-hint {
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-display);
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: var(--text-secondary);
+    opacity: 0.6;
+    animation: hintBounce 2s infinite;
+    text-transform: uppercase;
+}
+
+@keyframes hintBounce {
+
+    0%,
+    100% {
+        transform: translateX(-50%) translateY(0);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(-8px);
+        opacity: 1;
+    }
+}
+
+/* =============================================
+   FIFA CARD - PREMIUM DESIGN
+   ============================================= */
+
+.fifa-card {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    opacity: 0;
+    transform: scale(0.8) rotateY(-180deg);
+    transition: all 0.8s var(--transition-smooth);
+}
+
+.fifa-card.revealed {
+    opacity: 1;
+    transform: scale(1) rotateY(0deg);
+}
+
+.fifa-card.shake {
+    animation: cardShake 0.6s ease-in-out;
+}
+
+@keyframes cardShake {
+
+    0%,
+    100% {
+        transform: scale(1) rotateY(0deg) translateX(0);
+    }
+
+    10% {
+        transform: scale(1) rotateY(0deg) translateX(-8px) rotate(-1deg);
+    }
+
+    20% {
+        transform: scale(1) rotateY(0deg) translateX(8px) rotate(1deg);
+    }
+
+    30% {
+        transform: scale(1) rotateY(0deg) translateX(-8px) rotate(-1deg);
+    }
+
+    40% {
+        transform: scale(1) rotateY(0deg) translateX(8px) rotate(1deg);
+    }
+
+    50% {
+        transform: scale(1) rotateY(0deg) translateX(-4px);
+    }
+
+    60% {
+        transform: scale(1) rotateY(0deg) translateX(4px);
+    }
+}
+
+.card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    background: linear-gradient(165deg,
+            rgba(25, 25, 45, 0.95) 0%,
+            rgba(15, 15, 30, 0.98) 50%,
+            rgba(8, 8, 18, 1) 100%);
+    box-shadow:
+        0 0 80px rgba(212, 175, 55, 0.4),
+        0 0 160px rgba(0, 200, 255, 0.1),
+        0 30px 80px rgba(0, 0, 0, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 0 60px rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(212, 175, 55, 0.6);
+    transition: transform 0.3s ease-out;
+}
+
+/* Holographic Shimmer Effect */
+.card-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.card-shimmer {
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 300%;
+    height: 300%;
+    background: linear-gradient(45deg,
+            transparent 20%,
+            rgba(255, 255, 255, 0.03) 30%,
+            rgba(212, 175, 55, 0.08) 40%,
+            rgba(0, 200, 255, 0.05) 50%,
+            rgba(255, 255, 255, 0.03) 60%,
+            transparent 80%);
+    animation: shimmer 5s infinite linear;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-30%) translateY(-30%) rotate(45deg);
+    }
+
+    100% {
+        transform: translateX(30%) translateY(30%) rotate(45deg);
+    }
+}
+
+.card-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        repeating-linear-gradient(0deg,
+            transparent,
+            transparent 3px,
+            rgba(212, 175, 55, 0.02) 3px,
+            rgba(212, 175, 55, 0.02) 4px);
+    opacity: 0.4;
+}
+
+/* Card Border Glow */
+.card-border-glow {
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    border-radius: 23px;
+    background: linear-gradient(135deg,
+            var(--gold-primary),
+            var(--cyan-accent),
+            var(--gold-light),
+            var(--gold-primary));
+    background-size: 300% 300%;
+    z-index: -1;
+    animation: borderGlow 4s ease-in-out infinite;
+    filter: blur(3px);
+    opacity: 0.8;
+}
+
+@keyframes borderGlow {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+        opacity: 0.6;
+    }
+
+    50% {
+        background-position: 100% 50%;
+        opacity: 1;
+    }
+}
+
+/* Card Content */
+.card-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+}
+
+/* Card Header - Icon Badge */
+.card-header {
+    text-align: center;
+    padding: 8px 0;
+}
+
+.icon-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 6px;
+    color: var(--gold-primary);
+    text-shadow: 0 0 20px var(--glow-gold);
+    padding: 6px 16px;
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 20px;
+}
+
+.icon-star {
+    font-size: 10px;
+    animation: starTwinkle 2s infinite;
+}
+
+@keyframes starTwinkle {
+
+    0%,
+    100% {
+        opacity: 0.5;
+        transform: scale(0.8);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+/* Rating & Position */
+.card-rating-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px 15px;
+}
+
+.rating {
+    text-align: center;
+}
+
+.rating-number {
+    font-family: var(--font-display);
+    font-size: 56px;
+    font-weight: 900;
+    background: linear-gradient(180deg,
+            #ffffff 0%,
+            var(--gold-light) 30%,
+            var(--gold-primary) 70%,
+            var(--gold-dark) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+    line-height: 1;
+}
+
+.position {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.3) 0%, rgba(212, 175, 55, 0.1) 100%);
+    border: 1px solid rgba(212, 175, 55, 0.5);
+    border-radius: 6px;
+    text-shadow: 0 0 10px var(--glow-gold);
+}
+
+/* Player Image */
+.player-image-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    min-height: 160px;
+}
+
+.player-image {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(20, 20, 35, 0.8) 100%);
+    border: 3px solid var(--gold-primary);
+    box-shadow:
+        0 0 40px var(--glow-gold),
+        0 0 80px rgba(0, 200, 255, 0.2),
+        inset 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    filter: contrast(1.1) saturate(0.95);
+}
+
+.player-glow {
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    background:
+        radial-gradient(circle, rgba(212, 175, 55, 0.3) 0%, transparent 60%),
+        radial-gradient(circle at 30% 30%, rgba(0, 200, 255, 0.15) 0%, transparent 40%);
+    opacity: 0.5;
+    z-index: -1;
+    animation: playerGlow 4s infinite;
+}
+
+@keyframes playerGlow {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.4;
+    }
+
+    50% {
+        transform: scale(1.15);
+        opacity: 0.6;
+    }
+}
+
+/* Player Name Section */
+.player-name-section {
+    text-align: center;
+    padding: 12px 0;
+}
+
+.player-alias {
+    font-family: var(--font-display);
+    font-size: 34px;
+    font-weight: 800;
+    letter-spacing: 8px;
+    background: linear-gradient(180deg, #ffffff 0%, #e0e0e0 50%, #b0b0b0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.5));
+}
+
+.player-name {
+    font-family: var(--font-primary);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    color: var(--gold-primary);
+    margin-top: 4px;
+    text-shadow: 0 0 10px var(--glow-gold);
+}
+
+/* Stats Container */
+.stats-container {
+    padding: 8px 10px;
+}
+
+.stats-divider {
+    height: 2px;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(0, 200, 255, 0.3) 25%,
+            var(--gold-primary) 50%,
+            rgba(0, 200, 255, 0.3) 75%,
+            transparent 100%);
+    margin-bottom: 10px;
+    box-shadow: 0 0 10px var(--glow-gold);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 4px;
+    background: rgba(212, 175, 55, 0.08);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    border-radius: 6px;
+    transition: all 0.3s var(--transition-smooth);
+    position: relative;
+}
+
+.stat-item:hover {
+    background: rgba(212, 175, 55, 0.2);
+    border-color: rgba(212, 175, 55, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+}
+
+.stat-item:hover .stat-tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    visibility: visible;
+}
+
+.stat-value {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1;
+}
+
+.stat-label {
+    font-family: var(--font-primary);
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--gold-primary);
+    letter-spacing: 1px;
+    margin-top: 2px;
+}
+
+.stat-tooltip {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background: rgba(0, 0, 0, 0.9);
+    color: var(--text-primary);
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 11px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    z-index: 100;
+}
+
+.stat-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: rgba(0, 0, 0, 0.9);
+}
+
+/* Celebration Particles */
+.celebration-particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.celebration-particle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .card-wrapper {
+        width: 300px;
+        height: 520px;
+    }
+
+    .rating-number {
+        font-size: 48px;
+    }
+
+    .player-alias {
+        font-size: 28px;
+    }
+
+    .pack-icon {
+        font-size: 70px;
+    }
+}

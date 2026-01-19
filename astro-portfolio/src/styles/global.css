@@ -1,0 +1,184 @@
+/* =============================================
+   FIFA ICONS PORTFOLIO - CSS VARIABLES & RESET
+   ============================================= */
+
+/* CSS Variables - Enhanced Theme */
+:root {
+    /* Gold Gradient Colors */
+    --gold-primary: #d4af37;
+    --gold-light: #f4d03f;
+    --gold-dark: #b8860b;
+    --gold-accent: #ffd700;
+
+    /* Cyan Accent for Glow */
+    --cyan-glow: rgba(0, 255, 255, 0.15);
+    --cyan-accent: #00d4ff;
+
+    /* Icons Card Colors */
+    --card-bg-start: #1a1a2e;
+    --card-bg-end: #0f0f1a;
+    --card-border: linear-gradient(135deg, #d4af37 0%, #f4e4ba 25%, #d4af37 50%, #b8860b 75%, #d4af37 100%);
+
+    /* Background Colors */
+    --bg-primary: #050510;
+    --bg-secondary: #0a0a1a;
+    --bg-card: rgba(15, 15, 30, 0.85);
+
+    /* Text Colors */
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0b8;
+    --text-gold: #d4af37;
+
+    /* Glow Colors */
+    --glow-gold: rgba(212, 175, 55, 0.5);
+    --glow-white: rgba(255, 255, 255, 0.2);
+
+    /* Fonts */
+    --font-primary: 'Rajdhani', sans-serif;
+    --font-display: 'Orbitron', sans-serif;
+
+    /* Sizing */
+    --card-width: 340px;
+    --card-height: 580px;
+
+    /* Transitions */
+    --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Reset & Base */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-primary);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* =============================================
+   ANIMATED STARFIELD BACKGROUND
+   ============================================= */
+
+.starfield {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.star {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    animation: twinkle var(--duration) ease-in-out infinite;
+    opacity: 0;
+}
+
+@keyframes twinkle {
+
+    0%,
+    100% {
+        opacity: 0.2;
+        transform: scale(0.8);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+/* Viewport Vignette - HUD Style Glow */
+.vignette {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    background:
+        radial-gradient(ellipse at 50% 0%, var(--cyan-glow) 0%, transparent 50%),
+        radial-gradient(ellipse at 0% 50%, rgba(212, 175, 55, 0.08) 0%, transparent 40%),
+        radial-gradient(ellipse at 100% 50%, rgba(212, 175, 55, 0.08) 0%, transparent 40%),
+        radial-gradient(ellipse at 50% 100%, rgba(0, 150, 200, 0.1) 0%, transparent 50%);
+}
+
+/* Ambient Moving Gradient */
+.ambient-glow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(0, 200, 255, 0.03) 0%, transparent 50%);
+    animation: ambientMove 20s ease-in-out infinite alternate;
+}
+
+@keyframes ambientMove {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    100% {
+        transform: translate(-2%, -2%) scale(1.1);
+    }
+}
+
+/* Grid Lines Overlay */
+.grid-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    background-image:
+        linear-gradient(rgba(212, 175, 55, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212, 175, 55, 0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.5;
+}
+
+/* Container */
+.container {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Main Content */
+.main-content {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+.main-content.visible {
+    opacity: 1;
+    visibility: visible;
+}
