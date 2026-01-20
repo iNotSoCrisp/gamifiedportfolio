@@ -5,18 +5,18 @@ interface Skill {
 }
 
 const technicalSkills: Skill[] = [
-    { name: 'Python', value: 88 },
-    { name: 'JavaScript', value: 90 },
-    { name: 'React', value: 86 },
-    { name: 'Next.js', value: 85 },
-    { name: 'TypeScript', value: 87 },
+    { name: "Python", value: 88 },
+    { name: "JavaScript", value: 90 },
+    { name: "React", value: 86 },
+    { name: "Next.js", value: 85 },
+    { name: "TypeScript", value: 87 },
 ];
 
 const softSkills: Skill[] = [
-    { name: 'Logical Thinking', value: 92 },
-    { name: 'Problem Solving', value: 94 },
-    { name: 'Quick Learning', value: 90 },
-    { name: 'Communication', value: 88 },
+    { name: "Logical Thinking", value: 92 },
+    { name: "Problem Solving", value: 94 },
+    { name: "Quick Learning", value: 90 },
+    { name: "Communication", value: 88 },
 ];
 ---
 
@@ -31,215 +31,259 @@ const softSkills: Skill[] = [
         <div class="skills-category">
             <h3 class="category-title">Technical Skills</h3>
             <div class="skills-bars">
-                {technicalSkills.map((skill, index) => (
-                    <div class="skill-bar-item" data-value={skill.value} style={`--delay: ${index * 0.15}s`}>
-                        <div class="skill-info">
-                            <span class="skill-name">{skill.name}</span>
-                            <span class="skill-value">{skill.value}</span>
+                {
+                    technicalSkills.map((skill, index) => (
+                        <div
+                            class="skill-bar-item"
+                            data-value={skill.value}
+                            style={`--delay: ${index * 0.15}s`}
+                        >
+                            <div class="skill-info">
+                                <span class="skill-name">{skill.name}</span>
+                                <span class="skill-value">{skill.value}</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div
+                                    class="skill-fill"
+                                    style={`--target-width: ${skill.value}%`}
+                                />
+                            </div>
                         </div>
-                        <div class="skill-bar">
-                            <div class="skill-fill" style={`--target-width: ${skill.value}%`}></div>
-                        </div>
-                    </div>
-                ))}
+                    ))
+                }
             </div>
         </div>
 
         <div class="skills-category">
             <h3 class="category-title">Soft Skills</h3>
             <div class="skills-bars">
-                {softSkills.map((skill, index) => (
-                    <div class="skill-bar-item" data-value={skill.value} style={`--delay: ${(index + technicalSkills.length) * 0.15}s`}>
-                        <div class="skill-info">
-                            <span class="skill-name">{skill.name}</span>
-                            <span class="skill-value">{skill.value}</span>
+                {
+                    softSkills.map((skill, index) => (
+                        <div
+                            class="skill-bar-item"
+                            data-value={skill.value}
+                            style={`--delay: ${(index + technicalSkills.length) * 0.15}s`}
+                        >
+                            <div class="skill-info">
+                                <span class="skill-name">{skill.name}</span>
+                                <span class="skill-value">{skill.value}</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div
+                                    class="skill-fill"
+                                    style={`--target-width: ${skill.value}%`}
+                                />
+                            </div>
                         </div>
-                        <div class="skill-bar">
-                            <div class="skill-fill" style={`--target-width: ${skill.value}%`}></div>
-                        </div>
-                    </div>
-                ))}
+                    ))
+                }
             </div>
         </div>
     </div>
 </section>
 
 <style>
-/* Skills Section */
-.skills-section {
-    padding: 80px 20px;
-    max-width: 900px;
-    margin: 0 auto;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-.skills-section.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.section-header {
-    margin-bottom: 40px;
-    text-align: center;
-}
-
-.section-title {
-    font-family: var(--font-display);
-    font-size: 28px;
-    font-weight: 700;
-    letter-spacing: 6px;
-    color: var(--text-primary);
-    display: inline-flex;
-    align-items: center;
-    gap: 16px;
-    padding: 16px 32px;
-    background: rgba(212, 175, 55, 0.08);
-    border: 1px solid rgba(212, 175, 55, 0.2);
-    border-radius: 10px;
-}
-
-.title-icon {
-    font-size: 28px;
-}
-
-.skills-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 40px;
-}
-
-.skills-category {
-    background: var(--bg-card);
-    border: 1px solid rgba(212, 175, 55, 0.2);
-    border-radius: 16px;
-    padding: 30px;
-    backdrop-filter: blur(10px);
-}
-
-.category-title {
-    font-family: var(--font-display);
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: 4px;
-    color: var(--gold-primary);
-    margin-bottom: 25px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-}
-
-.skills-bars {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.skill-bar-item {
-    opacity: 0;
-    transform: translateX(-20px);
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-    transition-delay: var(--delay, 0s);
-}
-
-.skill-bar-item.visible {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-.skill-bar-item.animate .skill-fill {
-    width: var(--target-width);
-}
-
-.skill-info {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 8px;
-}
-
-.skill-name {
-    font-family: var(--font-primary);
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-primary);
-}
-
-.skill-value {
-    font-family: var(--font-display);
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--gold-primary);
-}
-
-.skill-bar {
-    height: 8px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
-    overflow: hidden;
-    position: relative;
-}
-
-.skill-fill {
-    height: 100%;
-    width: 0;
-    background: linear-gradient(90deg, var(--gold-dark) 0%, var(--gold-primary) 50%, var(--gold-light) 100%);
-    border-radius: 4px;
-    transition: width 1s var(--transition-smooth);
-    position: relative;
-    box-shadow: 0 0 10px var(--glow-gold);
-}
-
-.skill-fill::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(90deg, 
-        transparent 0%,
-        rgba(255, 255, 255, 0.3) 50%,
-        transparent 100%);
-    animation: skillShine 2s infinite;
-}
-
-@keyframes skillShine {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
-}
-
-@media (max-width: 768px) {
-    .skills-content {
-        grid-template-columns: 1fr;
+    /* Skills Section */
+    .skills-section {
+        padding: 80px 20px;
+        max-width: 900px;
+        margin: 0 auto;
+        opacity: 0;
+        transform: translateY(30px);
+        transition:
+            opacity 0.8s ease-out,
+            transform 0.8s ease-out;
     }
-}
+
+    .skills-section.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .section-header {
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+    .section-title {
+        font-family: var(--font-display);
+        font-size: 28px;
+        font-weight: 700;
+        letter-spacing: 6px;
+        color: var(--text-primary);
+        display: inline-flex;
+        align-items: center;
+        gap: 16px;
+        padding: 16px 32px;
+        background: rgba(138, 43, 226, 0.1);
+        border: 1px solid rgba(138, 43, 226, 0.3);
+        border-radius: 10px;
+    }
+
+    .title-icon {
+        font-size: 28px;
+    }
+
+    .skills-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 40px;
+    }
+
+    .skills-category {
+        background: linear-gradient(
+            165deg,
+            rgba(26, 10, 46, 0.6) 0%,
+            rgba(13, 5, 23, 0.8) 50%,
+            rgba(10, 26, 31, 0.6) 100%
+        );
+        border: 1px solid rgba(138, 43, 226, 0.3);
+        border-radius: 16px;
+        padding: 30px;
+        backdrop-filter: blur(10px);
+        box-shadow:
+            0 10px 30px rgba(0, 0, 0, 0.2),
+            0 0 20px rgba(138, 43, 226, 0.08);
+    }
+
+    .category-title {
+        font-family: var(--font-display);
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: 4px;
+        color: rgba(200, 162, 255, 1);
+        margin-bottom: 25px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid rgba(138, 43, 226, 0.3);
+    }
+
+    .skills-bars {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .skill-bar-item {
+        opacity: 0;
+        transform: translateX(-20px);
+        transition:
+            opacity 0.5s ease-out,
+            transform 0.5s ease-out;
+        transition-delay: var(--delay, 0s);
+    }
+
+    .skill-bar-item.visible {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .skill-bar-item.animate .skill-fill {
+        width: var(--target-width);
+    }
+
+    .skill-info {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+    }
+
+    .skill-name {
+        font-family: var(--font-primary);
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text-primary);
+    }
+
+    .skill-value {
+        font-family: var(--font-display);
+        font-size: 14px;
+        font-weight: 700;
+        color: rgba(200, 162, 255, 0.9);
+    }
+
+    .skill-bar {
+        height: 8px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .skill-fill {
+        height: 100%;
+        width: 0;
+        background: linear-gradient(
+            90deg,
+            rgba(80, 20, 140, 1) 0%,
+            rgba(138, 43, 226, 1) 50%,
+            rgba(0, 150, 136, 0.8) 100%
+        );
+        border-radius: 4px;
+        transition: width 1s var(--transition-smooth);
+        position: relative;
+        box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+    }
+
+    .skill-fill::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.3) 50%,
+            transparent 100%
+        );
+        animation: skillShine 2s infinite;
+    }
+
+    @keyframes skillShine {
+        0% {
+            transform: translateX(-100%);
+        }
+        100% {
+            transform: translateX(100%);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .skills-content {
+            grid-template-columns: 1fr;
+        }
+    }
 </style>
 
 <script>
-// Scroll animation for skills
-document.addEventListener('DOMContentLoaded', () => {
-    const skillsSection = document.querySelector('.skills-section');
-    const skillItems = document.querySelectorAll('.skill-bar-item');
+    // Scroll animation for skills
+    document.addEventListener("DOMContentLoaded", () => {
+        const skillsSection = document.querySelector(".skills-section");
+        const skillItems = document.querySelectorAll(".skill-bar-item");
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                
-                if (entry.target.classList.contains('skills-section')) {
-                    skillItems.forEach((item, index) => {
-                        setTimeout(() => {
-                            item.classList.add('visible');
-                            item.classList.add('animate');
-                        }, index * 150);
-                    });
-                }
-            }
-        });
-    }, { threshold: 0.2 });
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
 
-    if (skillsSection) {
-        observer.observe(skillsSection);
-    }
-});
+                        if (entry.target.classList.contains("skills-section")) {
+                            skillItems.forEach((item, index) => {
+                                setTimeout(() => {
+                                    item.classList.add("visible");
+                                    item.classList.add("animate");
+                                }, index * 150);
+                            });
+                        }
+                    }
+                });
+            },
+            { threshold: 0.2 },
+        );
+
+        if (skillsSection) {
+            observer.observe(skillsSection);
+        }
+    });
 </script>
