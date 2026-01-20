@@ -9,7 +9,7 @@
     width: 100%;
     height: 100%;
     z-index: 9999;
-    background: radial-gradient(ellipse at center, #0f0f2d 0%, #050510 50%, #000008 100%);
+    background: radial-gradient(ellipse at center, #0c0c18 0%, #08080f 50%, #030306 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -67,7 +67,7 @@
     }
 }
 
-.landing-starfield {
+.landing-sparkles {
     position: absolute;
     top: 0;
     left: 0;
@@ -80,10 +80,13 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 800px;
-    height: 800px;
+    width: 900px;
+    height: 900px;
     transform: translate(-50%, -50%);
-    background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, rgba(0, 200, 255, 0.08) 30%, transparent 70%);
+    background:
+        radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 30% 30%, rgba(255, 248, 220, 0.06) 0%, transparent 35%),
+        radial-gradient(circle at 70% 30%, rgba(255, 248, 220, 0.06) 0%, transparent 35%);
     animation: landingGlowPulse 4s ease-in-out infinite;
 }
 
@@ -196,11 +199,33 @@
     pointer-events: none;
     z-index: 200;
     opacity: 0;
+    transform-origin: center center;
     transition: opacity 0.3s ease;
 }
 
 .screen-crack.active {
     opacity: 1;
+}
+
+.screen-crack.shrinking {
+    animation: crackShrink 0.5s ease-in forwards;
+}
+
+@keyframes crackShrink {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    70% {
+        opacity: 0.8;
+        transform: scale(0.3);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(0);
+    }
 }
 
 .screen-crack svg {
@@ -218,7 +243,7 @@
 }
 
 .screen-crack.active .crack-line {
-    animation: crackDraw 0.5s ease-out forwards;
+    animation: crackDraw 0.4s ease-out forwards;
 }
 
 @keyframes crackDraw {
@@ -630,29 +655,35 @@
     }
 }
 
-/* Star Animation */
-.star {
+/* Sparkle Animation */
+.landing-sparkle {
     position: absolute;
-    background: #fff;
     border-radius: 50%;
-    animation: twinkle var(--duration, 3s) ease-in-out infinite;
+    animation: sparkleFloat var(--duration, 8s) ease-in-out infinite;
     opacity: 0;
     will-change: opacity, transform;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
+    background: radial-gradient(circle, var(--color, rgba(212, 175, 55, 0.8)) 0%, transparent 70%);
 }
 
-@keyframes twinkle {
+@keyframes sparkleFloat {
 
     0%,
     100% {
-        opacity: 0.2;
-        transform: scale3d(0.8, 0.8, 1);
+        opacity: 0;
+        transform: translateY(0) scale(0.5);
+    }
+
+    20% {
+        opacity: var(--max-opacity, 0.6);
     }
 
     50% {
-        opacity: 1;
-        transform: scale3d(1.2, 1.2, 1);
+        opacity: var(--max-opacity, 0.6);
+        transform: translateY(-25px) scale(1);
+    }
+
+    80% {
+        opacity: var(--max-opacity, 0.6);
     }
 }
 

@@ -7,13 +7,15 @@ interface LandingPageProps {
 
 export default function LandingPage({ onEnter }: LandingPageProps) {
     const [impactTriggered, setImpactTriggered] = useState(false);
+    const [crackShrinking, setCrackShrinking] = useState(false);
     const [contentRevealed, setContentRevealed] = useState(false);
     const [isHidden, setIsHidden] = useState(false);
 
     // Football animation timeline
     useEffect(() => {
         const impactTime = 1400; // 70% of 2s animation
-        const animationEnd = 2200;
+        const crackShrinkTime = 1900; // After crack appears, start shrinking
+        const animationEnd = 2600; // After crack shrinks, reveal content
 
         const impactTimer = setTimeout(() => {
             setImpactTriggered(true);
@@ -22,12 +24,17 @@ export default function LandingPage({ onEnter }: LandingPageProps) {
             }
         }, impactTime);
 
+        const crackShrinkTimer = setTimeout(() => {
+            setCrackShrinking(true);
+        }, crackShrinkTime);
+
         const revealTimer = setTimeout(() => {
             setContentRevealed(true);
         }, animationEnd);
 
         return () => {
             clearTimeout(impactTimer);
+            clearTimeout(crackShrinkTimer);
             clearTimeout(revealTimer);
         };
     }, []);
@@ -53,11 +60,6 @@ export default function LandingPage({ onEnter }: LandingPageProps) {
 
     return (
         <div className={`landing-page ${isHidden ? 'hidden' : ''} ${impactTriggered ? 'shake' : ''}`}>
-            <div className="landing-starfield">
-                {Array.from({ length: 200 }).map((_, i) => (
-                    <Star key={i} />
-                ))}
-            </div>
             <div className="landing-glow"></div>
 
             {/* Football Animation */}
@@ -71,7 +73,7 @@ export default function LandingPage({ onEnter }: LandingPageProps) {
             )}
 
             {/* Screen Crack Effect */}
-            <div className={`screen-crack ${impactTriggered ? 'active' : ''}`}>
+            <div className={`screen-crack ${impactTriggered ? 'active' : ''} ${crackShrinking ? 'shrinking' : ''}`}>
                 <svg viewBox="0 0 100 100" preserveAspectRatio="none">
                     <path className="crack-line" d="M50,50 L30,20 L25,35 L10,25" />
                     <path className="crack-line" d="M50,50 L70,15 L85,30" />
@@ -113,70 +115,8 @@ export default function LandingPage({ onEnter }: LandingPageProps) {
                     <span className="scroll-text">TAP THE BALL TO REVEAL</span>
                 </div>
             </div>
-
-            <div className="landing-particles">
-                <LandingParticles />
-            </div>
         </div>
     );
-}
-
-function Star() {
-    const style: React.CSSProperties = {
-        left: `${Math.random() * 100}%`,
-        top: `${Math.random() * 100}%`,
-        width: `${Math.random() * 2 + 1}px`,
-        height: `${Math.random() * 2 + 1}px`,
-        ['--duration' as string]: `${Math.random() * 3 + 2}s`,
-        animationDuration: `${Math.random() * 3 + 2}s`,
-        animationDelay: `${Math.random() * 5}s`,
-    };
-    return <div className="star" style={style}></div>;
-}
-
-function LandingParticles() {
-    const [particles, setParticles] = useState<number[]>([]);
-    const colors = ['#d4af37', '#f4d03f', '#00d4ff', '#ffffff'];
-
-    useEffect(() => {
-        // Initial particles
-        const initialParticles = Array.from({ length: 30 }, (_, i) => i);
-        setParticles(initialParticles);
-
-        // Create new particles continuously
-        const interval = setInterval(() => {
-            setParticles(prev => [...prev, Date.now()]);
-        }, 300);
-
-        return () => clearInterval(interval);
-    }, []);
-
-    return (
-        <>
-            {particles.slice(-50).map((id) => (
-                <Particle key={id} colors={colors} />
-            ))}
-        </>
-    );
-}
-
-function Particle({ colors }: { colors: string[] }) {
-    const color = colors[Math.floor(Math.random() * colors.length)];
-    const size = Math.random() * 4 + 2;
-    const duration = Math.random() * 8 + 5;
-    const left = Math.random() * 100;
-
-    const style: React.CSSProperties = {
-        background: color,
-        width: `${size}px`,
-        height: `${size}px`,
-        left: `${left}%`,
-        bottom: '-20px',
-        animationDuration: `${duration}s`,
-        boxShadow: `0 0 ${size * 2}px ${color}`,
-    };
-
-    return <div className="landing-particle" style={style}></div>;
 }
 
 function FootballSVG() {

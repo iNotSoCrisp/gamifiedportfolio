@@ -42,10 +42,10 @@ export default function App() {
 
             {showMain && (
                 <div className={`main-content ${mainVisible ? 'visible' : ''}`}>
-                    {/* Starfield Background */}
-                    <div className="starfield">
-                        {Array.from({ length: 150 }).map((_, i) => (
-                            <Star key={i} />
+                    {/* Floating Sparkles Background */}
+                    <div className="sparkle-field">
+                        {Array.from({ length: 60 }).map((_, i) => (
+                            <Sparkle key={i} />
                         ))}
                     </div>
 
@@ -68,16 +68,28 @@ export default function App() {
     );
 }
 
-function Star() {
+function Sparkle() {
+    const colors = [
+        'rgba(212, 175, 55, 0.7)',  // Gold
+        'rgba(244, 208, 63, 0.6)',  // Light gold
+        'rgba(255, 255, 255, 0.5)', // White
+        'rgba(0, 212, 255, 0.4)',   // Cyan (rare)
+    ];
+
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    const size = Math.random() * 4 + 2;
+    const maxOpacity = Math.random() * 0.4 + 0.2;
+
     const style: React.CSSProperties = {
         left: `${Math.random() * 100}%`,
         top: `${Math.random() * 100}%`,
-        width: `${Math.random() * 2 + 1}px`,
-        height: `${Math.random() * 2 + 1}px`,
-        ['--duration' as string]: `${Math.random() * 3 + 2}s`,
-        animationDuration: `${Math.random() * 3 + 2}s`,
-        animationDelay: `${Math.random() * 5}s`,
-        ['--base-opacity' as string]: `${Math.random() * 0.5 + 0.3}`,
+        width: `${size}px`,
+        height: `${size}px`,
+        ['--duration' as string]: `${Math.random() * 6 + 6}s`,
+        ['--color' as string]: color,
+        ['--max-opacity' as string]: `${maxOpacity}`,
+        animationDelay: `${Math.random() * 8}s`,
     };
-    return <div className="star" style={style}></div>;
+    return <div className="sparkle" style={style}></div>;
 }
+
