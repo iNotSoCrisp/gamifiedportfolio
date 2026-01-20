@@ -21,6 +21,7 @@
     border: 1px solid rgba(212, 175, 55, 0.1);
     border-radius: 50%;
     animation: heroRing 8s linear infinite;
+    pointer-events: none;
 }
 
 .hero::after {
@@ -31,6 +32,7 @@
     border: 1px dashed rgba(0, 200, 255, 0.05);
     border-radius: 50%;
     animation: heroRing 12s linear infinite reverse;
+    pointer-events: none;
 }
 
 @keyframes heroRing {
@@ -48,6 +50,8 @@
     width: var(--card-width);
     height: var(--card-height);
     cursor: pointer;
+    perspective: 1500px;
+    transform-style: preserve-3d;
 }
 
 /* Pack (Back of Card) */
@@ -231,11 +235,13 @@
     opacity: 0;
     transform: scale(0.8) rotateY(-180deg);
     transition: all 0.8s var(--transition-smooth);
+    will-change: transform, opacity;
 }
 
 .fifa-card.revealed {
     opacity: 1;
     transform: scale(1) rotateY(0deg);
+    perspective: 1500px;
 }
 
 .fifa-card.shake {
@@ -291,7 +297,11 @@
         inset 0 1px 0 rgba(255, 255, 255, 0.1),
         inset 0 0 60px rgba(0, 0, 0, 0.3);
     border: 2px solid rgba(212, 175, 55, 0.6);
-    transition: transform 0.3s ease-out;
+    transition: transform 0.1s ease-out, box-shadow 0.3s ease-out;
+    transform-style: preserve-3d;
+    will-change: transform;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 /* Holographic Shimmer Effect */
