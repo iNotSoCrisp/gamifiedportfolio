@@ -84,9 +84,9 @@
     height: 900px;
     transform: translate(-50%, -50%);
     background:
-        radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, transparent 40%),
-        radial-gradient(circle at 30% 30%, rgba(255, 248, 220, 0.06) 0%, transparent 35%),
-        radial-gradient(circle at 70% 30%, rgba(255, 248, 220, 0.06) 0%, transparent 35%);
+        radial-gradient(circle, rgba(138, 43, 226, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 30% 30%, rgba(0, 150, 136, 0.08) 0%, transparent 35%),
+        radial-gradient(circle at 70% 30%, rgba(200, 162, 255, 0.06) 0%, transparent 35%);
     animation: landingGlowPulse 4s ease-in-out infinite;
 }
 
@@ -261,7 +261,7 @@
     height: 100%;
     background: radial-gradient(circle at center,
             rgba(255, 255, 255, 0.9) 0%,
-            rgba(212, 175, 55, 0.6) 30%,
+            rgba(138, 43, 226, 0.6) 30%,
             transparent 70%);
     pointer-events: none;
     z-index: 150;
@@ -329,11 +329,11 @@
     align-items: center;
     gap: 12px;
     padding: 12px 28px;
-    background: rgba(212, 175, 55, 0.12);
-    border: 2px solid var(--gold-primary);
+    background: rgba(138, 43, 226, 0.15);
+    border: 2px solid rgba(138, 43, 226, 0.6);
     border-radius: 50px;
     animation: badgeFadeIn 1s ease-out 0.3s both;
-    box-shadow: 0 0 30px var(--glow-gold), inset 0 0 20px rgba(212, 175, 55, 0.1);
+    box-shadow: 0 0 30px rgba(138, 43, 226, 0.4), inset 0 0 20px rgba(138, 43, 226, 0.1);
 }
 
 @keyframes badgeFadeIn {
@@ -370,8 +370,8 @@
     font-size: 14px;
     font-weight: 700;
     letter-spacing: 6px;
-    color: var(--gold-primary);
-    text-shadow: 0 0 20px var(--glow-gold);
+    color: rgba(200, 162, 255, 1);
+    text-shadow: 0 0 20px rgba(138, 43, 226, 0.6);
 }
 
 /* Intro Title */
@@ -439,13 +439,13 @@
     letter-spacing: 16px;
     background: linear-gradient(180deg,
             #ffffff 0%,
-            var(--gold-light) 30%,
-            var(--gold-primary) 60%,
-            var(--gold-dark) 100%);
+            rgba(200, 162, 255, 1) 30%,
+            rgba(138, 43, 226, 1) 60%,
+            rgba(80, 20, 140, 1) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    filter: drop-shadow(0 4px 20px var(--glow-gold));
+    filter: drop-shadow(0 4px 20px rgba(138, 43, 226, 0.5));
     animation: nameGlow 3s ease-in-out infinite;
 }
 
@@ -453,11 +453,11 @@
 
     0%,
     100% {
-        filter: drop-shadow(0 4px 20px var(--glow-gold));
+        filter: drop-shadow(0 4px 20px rgba(138, 43, 226, 0.5));
     }
 
     50% {
-        filter: drop-shadow(0 4px 40px var(--glow-gold)) drop-shadow(0 0 60px rgba(0, 200, 255, 0.3));
+        filter: drop-shadow(0 4px 40px rgba(138, 43, 226, 0.7)) drop-shadow(0 0 60px rgba(0, 150, 136, 0.4));
     }
 }
 
@@ -466,8 +466,8 @@
     font-size: 16px;
     font-weight: 600;
     letter-spacing: 8px;
-    color: var(--cyan-accent);
-    text-shadow: 0 0 20px var(--cyan-accent);
+    color: rgba(0, 150, 136, 0.9);
+    text-shadow: 0 0 20px rgba(0, 150, 136, 0.6);
 }
 
 /* Intro Tagline */
@@ -530,7 +530,7 @@
 }
 
 .football-btn:hover .football-btn-svg {
-    filter: drop-shadow(0 10px 40px rgba(212, 175, 55, 0.5));
+    filter: drop-shadow(0 10px 40px rgba(138, 43, 226, 0.6));
 }
 
 .football-btn-text {
@@ -541,7 +541,7 @@
     font-family: var(--font-display);
     font-size: 16px;
     font-weight: 800;
-    color: var(--gold-primary);
+    color: rgba(200, 162, 255, 1);
     letter-spacing: 3px;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     pointer-events: none;
@@ -554,7 +554,7 @@
     width: 150%;
     height: 150%;
     transform: translate(-50%, -50%);
-    background: radial-gradient(circle, rgba(212, 175, 55, 0.3) 0%, transparent 60%);
+    background: radial-gradient(circle, rgba(138, 43, 226, 0.4) 0%, transparent 60%);
     opacity: 0;
     transition: opacity 0.3s ease;
     pointer-events: none;
@@ -662,7 +662,7 @@
     animation: sparkleFloat var(--duration, 8s) ease-in-out infinite;
     opacity: 0;
     will-change: opacity, transform;
-    background: radial-gradient(circle, var(--color, rgba(212, 175, 55, 0.8)) 0%, transparent 70%);
+    background: radial-gradient(circle, var(--color, rgba(138, 43, 226, 0.8)) 0%, transparent 70%);
 }
 
 @keyframes sparkleFloat {
