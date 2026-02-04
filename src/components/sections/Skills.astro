@@ -2,51 +2,63 @@
 interface Skill {
     name: string;
     value: number;
+    color?: "cyan" | "purple" | "green";
 }
 
 const technicalSkills: Skill[] = [
-    { name: "Python", value: 88 },
-    { name: "JavaScript", value: 90 },
-    { name: "React", value: 86 },
-    { name: "Next.js", value: 85 },
-    { name: "TypeScript", value: 87 },
+    { name: "Python", value: 88, color: "purple" },
+    { name: "JavaScript", value: 90, color: "cyan" },
+    { name: "React", value: 86, color: "cyan" },
+    { name: "Next.js", value: 85, color: "green" },
+    { name: "TypeScript", value: 87, color: "cyan" },
 ];
 
 const softSkills: Skill[] = [
-    { name: "Logical Thinking", value: 92 },
-    { name: "Problem Solving", value: 94 },
-    { name: "Quick Learning", value: 90 },
-    { name: "Communication", value: 88 },
+    { name: "Logical Thinking", value: 92, color: "purple" },
+    { name: "Problem Solving", value: 94, color: "cyan" },
+    { name: "Quick Learning", value: 90, color: "green" },
+    { name: "Communication", value: 88, color: "purple" },
 ];
 ---
 
-<section class="skills-section" id="skills">
+<section class="capabilities-section" id="capabilities">
     <div class="section-header">
-        <h2 class="section-title">
-            <span class="title-icon">📊</span>
-            SKILL ATTRIBUTES
-        </h2>
+        <div class="header-line"></div>
+        <div class="header-content">
+            <span class="header-indicator"></span>
+            <span class="header-label">CAPABILITIES.SYS</span>
+        </div>
+        <div class="header-line"></div>
     </div>
-    <div class="skills-content">
-        <div class="skills-category">
-            <h3 class="category-title">Technical Skills</h3>
-            <div class="skills-bars">
+
+    <h2 class="section-title">System Capabilities</h2>
+
+    <div class="capabilities-grid">
+        <div class="capability-panel floating-panel">
+            <div class="panel-header">
+                <span class="panel-indicator cyan"></span>
+                <span class="panel-title">Technical Subsystems</span>
+            </div>
+            <div class="skills-list">
                 {
                     technicalSkills.map((skill, index) => (
                         <div
-                            class="skill-bar-item"
-                            data-value={skill.value}
-                            style={`--delay: ${index * 0.15}s`}
+                            class={`skill-row ${skill.color}`}
+                            style={`--delay: ${index * 0.1}s`}
                         >
                             <div class="skill-info">
                                 <span class="skill-name">{skill.name}</span>
-                                <span class="skill-value">{skill.value}</span>
+                                <span class="skill-percent">
+                                    {skill.value}%
+                                </span>
                             </div>
-                            <div class="skill-bar">
+                            <div class="skill-bar-track">
                                 <div
-                                    class="skill-fill"
+                                    class="skill-bar-fill"
                                     style={`--target-width: ${skill.value}%`}
-                                />
+                                >
+                                    <div class="bar-glow" />
+                                </div>
                             </div>
                         </div>
                     ))
@@ -54,25 +66,31 @@ const softSkills: Skill[] = [
             </div>
         </div>
 
-        <div class="skills-category">
-            <h3 class="category-title">Soft Skills</h3>
-            <div class="skills-bars">
+        <div class="capability-panel floating-panel">
+            <div class="panel-header">
+                <span class="panel-indicator purple"></span>
+                <span class="panel-title">Core Operations</span>
+            </div>
+            <div class="skills-list">
                 {
                     softSkills.map((skill, index) => (
                         <div
-                            class="skill-bar-item"
-                            data-value={skill.value}
-                            style={`--delay: ${(index + technicalSkills.length) * 0.15}s`}
+                            class={`skill-row ${skill.color}`}
+                            style={`--delay: ${(index + technicalSkills.length) * 0.1}s`}
                         >
                             <div class="skill-info">
                                 <span class="skill-name">{skill.name}</span>
-                                <span class="skill-value">{skill.value}</span>
+                                <span class="skill-percent">
+                                    {skill.value}%
+                                </span>
                             </div>
-                            <div class="skill-bar">
+                            <div class="skill-bar-track">
                                 <div
-                                    class="skill-fill"
+                                    class="skill-bar-fill"
                                     style={`--target-width: ${skill.value}%`}
-                                />
+                                >
+                                    <div class="bar-glow" />
+                                </div>
                             </div>
                         </div>
                     ))
@@ -83,102 +101,144 @@ const softSkills: Skill[] = [
 </section>
 
 <style>
-    /* Skills Section */
-    .skills-section {
+    .capabilities-section {
         padding: 80px 20px;
-        max-width: 900px;
+        max-width: 1100px;
         margin: 0 auto;
         opacity: 0;
         transform: translateY(30px);
         transition:
-            opacity 0.8s ease-out,
-            transform 0.8s ease-out;
+            opacity var(--duration-slow) var(--ease-cinematic),
+            transform var(--duration-slow) var(--ease-cinematic);
     }
 
-    .skills-section.visible {
+    .capabilities-section.visible {
         opacity: 1;
         transform: translateY(0);
     }
 
     .section-header {
-        margin-bottom: 40px;
-        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 24px;
+    }
+
+    .header-line {
+        flex: 1;
+        max-width: 120px;
+        height: 1px;
+        background: linear-gradient(
+            90deg,
+            transparent,
+            var(--border-default),
+            transparent
+        );
+    }
+
+    .header-content {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .header-indicator {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--ion-purple);
+        box-shadow: 0 0 12px var(--ion-purple);
+        animation: indicatorPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes indicatorPulse {
+        0%,
+        100% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.5;
+        }
+    }
+
+    .header-label {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 2px;
+        color: var(--text-muted);
     }
 
     .section-title {
         font-family: var(--font-display);
-        font-size: 28px;
-        font-weight: 700;
-        letter-spacing: 6px;
+        font-size: 32px;
+        font-weight: 600;
+        letter-spacing: 1px;
         color: var(--text-primary);
-        display: inline-flex;
-        align-items: center;
-        gap: 16px;
-        padding: 16px 32px;
-        background: rgba(138, 43, 226, 0.1);
-        border: 1px solid rgba(138, 43, 226, 0.3);
-        border-radius: 10px;
+        text-align: center;
+        margin-bottom: 48px;
     }
 
-    .title-icon {
-        font-size: 28px;
-    }
-
-    .skills-content {
+    .capabilities-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        gap: 40px;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 24px;
     }
 
-    .skills-category {
-        background: linear-gradient(
-            165deg,
-            rgba(26, 10, 46, 0.6) 0%,
-            rgba(13, 5, 23, 0.8) 50%,
-            rgba(10, 26, 31, 0.6) 100%
-        );
-        border: 1px solid rgba(138, 43, 226, 0.3);
-        border-radius: 16px;
-        padding: 30px;
-        backdrop-filter: blur(10px);
-        box-shadow:
-            0 10px 30px rgba(0, 0, 0, 0.2),
-            0 0 20px rgba(138, 43, 226, 0.08);
+    .capability-panel {
+        padding: 0;
+        overflow: hidden;
     }
 
-    .category-title {
-        font-family: var(--font-display);
-        font-size: 16px;
-        font-weight: 700;
-        letter-spacing: 4px;
-        color: rgba(200, 162, 255, 1);
-        margin-bottom: 25px;
-        padding-bottom: 12px;
-        border-bottom: 1px solid rgba(138, 43, 226, 0.3);
+    .panel-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 16px 24px;
+        background: rgba(0, 0, 0, 0.3);
+        border-bottom: 1px solid var(--border-default);
     }
 
-    .skills-bars {
+    .panel-indicator {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+    }
+
+    .panel-indicator.cyan {
+        background: var(--neon-cyan);
+        box-shadow: 0 0 10px var(--neon-cyan);
+    }
+
+    .panel-indicator.purple {
+        background: var(--ion-purple);
+        box-shadow: 0 0 10px var(--ion-purple);
+    }
+
+    .panel-title {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        letter-spacing: 1px;
+        color: var(--text-secondary);
+    }
+
+    .skills-list {
+        padding: 24px;
         display: flex;
         flex-direction: column;
         gap: 20px;
     }
 
-    .skill-bar-item {
+    .skill-row {
         opacity: 0;
-        transform: translateX(-20px);
-        transition:
-            opacity 0.5s ease-out,
-            transform 0.5s ease-out;
-        transition-delay: var(--delay, 0s);
+        animation: skillFadeIn 0.5s var(--ease-cinematic) forwards;
+        animation-delay: var(--delay);
     }
 
-    .skill-bar-item.visible {
-        opacity: 1;
-        transform: translateX(0);
-    }
-
-    .skill-bar-item.animate .skill-fill {
-        width: var(--target-width);
+    @keyframes skillFadeIn {
+        to {
+            opacity: 1;
+        }
     }
 
     .skill-info {
@@ -190,100 +250,94 @@ const softSkills: Skill[] = [
     .skill-name {
         font-family: var(--font-primary);
         font-size: 14px;
-        font-weight: 600;
+        font-weight: 500;
         color: var(--text-primary);
     }
 
-    .skill-value {
-        font-family: var(--font-display);
-        font-size: 14px;
-        font-weight: 700;
-        color: rgba(200, 162, 255, 0.9);
+    .skill-percent {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        color: var(--text-muted);
     }
 
-    .skill-bar {
-        height: 8px;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 4px;
+    .skill-bar-track {
+        height: 6px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 3px;
         overflow: hidden;
         position: relative;
     }
 
-    .skill-fill {
+    .skill-bar-fill {
         height: 100%;
         width: 0;
-        background: linear-gradient(
-            90deg,
-            rgba(80, 20, 140, 1) 0%,
-            rgba(138, 43, 226, 1) 50%,
-            rgba(0, 150, 136, 0.8) 100%
-        );
-        border-radius: 4px;
-        transition: width 1s var(--transition-smooth);
+        border-radius: 3px;
         position: relative;
-        box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+        transition: width 1.2s var(--ease-cinematic);
+        transition-delay: var(--delay);
     }
 
-    .skill-fill::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
+    .capabilities-section.visible .skill-bar-fill {
+        width: var(--target-width);
+    }
+
+    .skill-row.cyan .skill-bar-fill {
         background: linear-gradient(
             90deg,
-            transparent 0%,
-            rgba(255, 255, 255, 0.3) 50%,
-            transparent 100%
+            var(--neon-cyan),
+            var(--plasma-green)
         );
-        animation: skillShine 2s infinite;
+        box-shadow: 0 0 15px var(--glow-cyan);
     }
 
-    @keyframes skillShine {
-        0% {
-            transform: translateX(-100%);
-        }
-        100% {
-            transform: translateX(100%);
-        }
+    .skill-row.purple .skill-bar-fill {
+        background: linear-gradient(90deg, var(--ion-purple), #c084fc);
+        box-shadow: 0 0 15px var(--glow-purple);
+    }
+
+    .skill-row.green .skill-bar-fill {
+        background: linear-gradient(90deg, var(--plasma-green), #4ade80);
+        box-shadow: 0 0 15px var(--glow-green);
+    }
+
+    .bar-glow {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 20px;
+        height: 20px;
+        background: inherit;
+        filter: blur(8px);
+        opacity: 0.8;
     }
 
     @media (max-width: 768px) {
-        .skills-content {
+        .capabilities-grid {
             grid-template-columns: 1fr;
+        }
+
+        .section-title {
+            font-size: 26px;
         }
     }
 </style>
 
 <script>
-    // Scroll animation for skills
     document.addEventListener("DOMContentLoaded", () => {
-        const skillsSection = document.querySelector(".skills-section");
-        const skillItems = document.querySelectorAll(".skill-bar-item");
+        const section = document.querySelector(".capabilities-section");
 
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add("visible");
-
-                        if (entry.target.classList.contains("skills-section")) {
-                            skillItems.forEach((item, index) => {
-                                setTimeout(() => {
-                                    item.classList.add("visible");
-                                    item.classList.add("animate");
-                                }, index * 150);
-                            });
-                        }
                     }
                 });
             },
-            { threshold: 0.2 },
+            { threshold: 0.1 },
         );
 
-        if (skillsSection) {
-            observer.observe(skillsSection);
-        }
+        if (section) observer.observe(section);
     });
 </script>

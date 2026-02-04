@@ -1,63 +1,68 @@
 /* =============================================
-   FIFA ICONS PORTFOLIO - CSS VARIABLES & RESET
-   DARK AESTHETIC THEME
+   CINEMATIC SCI-FI PORTFOLIO - GLOBAL STYLES
+   Immersive Spacecraft Interface Theme
    ============================================= */
 
-/* CSS Variables - Ultra Dark Theme */
+/* CSS Variables - Cinematic Sci-Fi Theme */
 :root {
-    /* Neon Accent Colors */
-    --neon-cyan: #00f0ff;
-    --neon-magenta: #ff00aa;
-    --neon-purple: #8b5cf6;
-    --neon-blue: #3b82f6;
+    /* Void/Space Backgrounds - Multi-layer depth */
+    --void-deep: #030508;
+    --void-blue: #0a0f1a;
+    --void-purple: #0d0a14;
+    --bg-primary: #050810;
+    --bg-secondary: rgba(10, 15, 26, 0.85);
+    --bg-tertiary: rgba(15, 20, 35, 0.9);
+    --bg-panel: rgba(8, 12, 20, 0.75);
 
-    /* Gold Gradient Colors (preserved for card) */
+    /* Energy Accent Colors */
+    --neon-cyan: #00f0ff;
+    --ion-purple: #a855f7;
+    --plasma-green: #22d3ee;
+    --amber-alert: #f59e0b;
+    --accent-blue: #3b82f6;
+
+    /* Glow Effects */
+    --glow-cyan: rgba(0, 240, 255, 0.4);
+    --glow-purple: rgba(168, 85, 247, 0.4);
+    --glow-green: rgba(34, 211, 238, 0.3);
+    --glow-amber: rgba(245, 158, 11, 0.3);
+    --glow-blue: rgba(59, 130, 246, 0.3);
+
+    /* Text Colors */
+    --text-primary: #e8ecf4;
+    --text-secondary: #8b95a5;
+    --text-muted: #4a5568;
+    --text-accent: var(--neon-cyan);
+
+    /* Panel & Border Colors */
+    --border-default: rgba(0, 240, 255, 0.1);
+    --border-active: rgba(0, 240, 255, 0.4);
+    --border-glow: rgba(168, 85, 247, 0.3);
+
+    /* Legacy: Gold for FIFA simulation page */
     --gold-primary: #d4af37;
     --gold-light: #f4d03f;
     --gold-dark: #b8860b;
     --gold-accent: #ffd700;
-
-    /* Glow Effects */
-    --cyan-glow: rgba(0, 240, 255, 0.15);
-    --magenta-glow: rgba(255, 0, 170, 0.12);
-    --cyan-accent: #00f0ff;
-
-    /* Icons Card Colors */
-    --card-bg-start: #0a0a12;
-    --card-bg-end: #050508;
-    --card-border: linear-gradient(135deg, #d4af37 0%, #f4e4ba 25%, #d4af37 50%, #b8860b 75%, #d4af37 100%);
-
-    /* Background Colors - Ultra Dark */
-    --bg-primary: #030305;
-    --bg-secondary: #050508;
-    --bg-tertiary: #08080d;
-    --bg-card: rgba(8, 8, 15, 0.92);
-    --bg-card-hover: rgba(12, 12, 22, 0.95);
-
-    /* Text Colors */
-    --text-primary: #ffffff;
-    --text-secondary: #8a8aa3;
-    --text-accent: #00f0ff;
-    --text-gold: #d4af37;
-
-    /* Glow Colors */
-    --glow-primary: rgba(0, 240, 255, 0.4);
-    --glow-secondary: rgba(255, 0, 170, 0.3);
     --glow-gold: rgba(212, 175, 55, 0.5);
-    --glow-white: rgba(255, 255, 255, 0.1);
-    --glow-spotlight: rgba(0, 240, 255, 0.06);
 
-    /* Fonts */
-    --font-primary: 'Rajdhani', sans-serif;
-    --font-display: 'Orbitron', sans-serif;
+    /* Typography */
+    --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-display: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 
     /* Sizing */
     --card-width: 340px;
     --card-height: 580px;
+    --panel-radius: 16px;
+    --panel-padding: 28px;
 
-    /* Transitions */
-    --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    /* Cinematic Transitions */
+    --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    --duration-slow: 0.8s;
+    --duration-medium: 0.5s;
+    --duration-fast: 0.3s;
 }
 
 /* Reset & Base */
@@ -80,13 +85,183 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
     line-height: 1.6;
+    position: relative;
 }
 
 /* =============================================
-   FIFA STADIUM-INSPIRED BACKGROUND
+   3D LAYERED DEPTH BACKGROUND SYSTEM
    ============================================= */
 
-/* Floating Sparkles - Premium FIFA Effect */
+/* Layer 0: Deep space base gradient (fixed) */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -10;
+    background:
+        /* Core void gradient */
+        radial-gradient(ellipse 120% 100% at 50% 0%,
+            rgba(10, 15, 30, 1) 0%,
+            rgba(5, 8, 16, 1) 50%,
+            rgba(3, 5, 10, 1) 100%),
+        /* Subtle nebula hints */
+        radial-gradient(ellipse 80% 60% at 20% 30%,
+            rgba(168, 85, 247, 0.08) 0%,
+            transparent 50%),
+        radial-gradient(ellipse 60% 50% at 80% 70%,
+            rgba(0, 240, 255, 0.05) 0%,
+            transparent 40%),
+        /* Deep base */
+        var(--void-deep);
+}
+
+/* Layer 1: Subtle star field pattern */
+.depth-layer-stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -9;
+    pointer-events: none;
+    background-image:
+        radial-gradient(1px 1px at 20% 30%, rgba(255, 255, 255, 0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 40% 70%, rgba(255, 255, 255, 0.2) 0%, transparent 100%),
+        radial-gradient(1px 1px at 60% 20%, rgba(255, 255, 255, 0.25) 0%, transparent 100%),
+        radial-gradient(1px 1px at 75% 55%, rgba(255, 255, 255, 0.15) 0%, transparent 100%),
+        radial-gradient(1px 1px at 90% 85%, rgba(255, 255, 255, 0.2) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 10% 80%, rgba(0, 240, 255, 0.3) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 85% 15%, rgba(168, 85, 247, 0.25) 0%, transparent 100%);
+    background-size: 200px 200px;
+    animation: starFieldDrift 120s linear infinite;
+}
+
+@keyframes starFieldDrift {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 200px 100px;
+    }
+}
+
+/* Layer 2: Nebula fog bloom */
+.depth-layer-nebula {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -8;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse 100% 80% at 30% 20%,
+            rgba(168, 85, 247, 0.06) 0%,
+            transparent 60%),
+        radial-gradient(ellipse 80% 70% at 70% 80%,
+            rgba(0, 240, 255, 0.04) 0%,
+            transparent 50%),
+        radial-gradient(ellipse 60% 50% at 50% 50%,
+            rgba(34, 211, 238, 0.03) 0%,
+            transparent 40%);
+    animation: nebulaFloat 30s ease-in-out infinite alternate;
+}
+
+@keyframes nebulaFloat {
+    0% {
+        opacity: 0.7;
+        transform: scale(1) translateY(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1.05) translateY(-20px);
+    }
+}
+
+/* Layer 3: Noise/grain texture overlay */
+.depth-layer-noise {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -7;
+    pointer-events: none;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* Layer 4: Edge vignette */
+.depth-layer-vignette {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -6;
+    pointer-events: none;
+    background: radial-gradient(ellipse 70% 60% at center,
+            transparent 0%,
+            rgba(0, 0, 0, 0.3) 70%,
+            rgba(0, 0, 0, 0.6) 100%);
+}
+
+/* =============================================
+   FLOATING PANEL SYSTEM
+   ============================================= */
+
+.floating-panel {
+    background: linear-gradient(135deg,
+            rgba(10, 15, 26, 0.8) 0%,
+            rgba(8, 12, 20, 0.85) 50%,
+            rgba(13, 10, 20, 0.8) 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border-default);
+    border-radius: var(--panel-radius);
+    box-shadow:
+        0 25px 50px rgba(0, 0, 0, 0.5),
+        0 0 80px rgba(0, 240, 255, 0.03),
+        0 0 120px rgba(168, 85, 247, 0.02),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    position: relative;
+    transition: all var(--duration-medium) var(--ease-cinematic);
+}
+
+.floating-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 15%;
+    right: 15%;
+    height: 1px;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(0, 240, 255, 0.4),
+            rgba(168, 85, 247, 0.3),
+            transparent);
+    opacity: 0.8;
+}
+
+.floating-panel:hover {
+    border-color: var(--border-active);
+    box-shadow:
+        0 30px 60px rgba(0, 0, 0, 0.6),
+        0 0 100px rgba(0, 240, 255, 0.08),
+        0 0 150px rgba(168, 85, 247, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    transform: translateY(-4px);
+}
+
+/* =============================================
+   AMBIENT EFFECTS (FIFA page compatible)
+   ============================================= */
+
 .sparkle-field {
     position: fixed;
     top: 0;
@@ -104,7 +279,7 @@ body {
     animation: sparkleFloat var(--duration, 8s) ease-in-out infinite;
     opacity: 0;
     will-change: opacity, transform;
-    background: radial-gradient(circle, var(--color, rgba(212, 175, 55, 0.8)) 0%, transparent 70%);
+    background: radial-gradient(circle, var(--color, rgba(0, 240, 255, 0.6)) 0%, transparent 70%);
 }
 
 @keyframes sparkleFloat {
@@ -129,7 +304,6 @@ body {
     }
 }
 
-/* Stadium Spotlight Vignette */
 .vignette {
     position: fixed;
     top: 0;
@@ -139,19 +313,12 @@ body {
     pointer-events: none;
     z-index: 1;
     background:
-        /* Top spotlight beams */
-        radial-gradient(ellipse 80% 50% at 25% -10%, var(--glow-spotlight) 0%, transparent 50%),
-        radial-gradient(ellipse 80% 50% at 75% -10%, var(--glow-spotlight) 0%, transparent 50%),
-        /* Gold accent corners */
-        radial-gradient(ellipse at 0% 0%, rgba(212, 175, 55, 0.06) 0%, transparent 40%),
-        radial-gradient(ellipse at 100% 0%, rgba(212, 175, 55, 0.06) 0%, transparent 40%),
-        /* Bottom subtle glow */
-        radial-gradient(ellipse at 50% 100%, rgba(0, 150, 200, 0.05) 0%, transparent 45%),
-        /* Deep vignette edges */
-        radial-gradient(ellipse at center, transparent 30%, rgba(0, 0, 0, 0.4) 100%);
+        radial-gradient(ellipse 80% 50% at 25% -10%, rgba(0, 240, 255, 0.05) 0%, transparent 50%),
+        radial-gradient(ellipse 80% 50% at 75% -10%, rgba(168, 85, 247, 0.04) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 100%, rgba(0, 240, 255, 0.03) 0%, transparent 45%),
+        radial-gradient(ellipse at center, transparent 30%, rgba(0, 0, 0, 0.5) 100%);
 }
 
-/* Ambient Stadium Glow */
 .ambient-glow {
     position: fixed;
     top: 0;
@@ -161,15 +328,15 @@ body {
     pointer-events: none;
     z-index: 0;
     background:
-        radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.04) 0%, transparent 50%),
-        radial-gradient(circle at 20% 70%, rgba(0, 200, 255, 0.02) 0%, transparent 40%),
-        radial-gradient(circle at 80% 70%, rgba(0, 200, 255, 0.02) 0%, transparent 40%);
-    animation: ambientPulse 8s ease-in-out infinite alternate;
+        radial-gradient(circle at 50% 30%, rgba(0, 240, 255, 0.04) 0%, transparent 50%),
+        radial-gradient(circle at 20% 70%, rgba(168, 85, 247, 0.03) 0%, transparent 40%),
+        radial-gradient(circle at 80% 60%, rgba(34, 211, 238, 0.02) 0%, transparent 40%);
+    animation: ambientPulse 12s ease-in-out infinite alternate;
 }
 
 @keyframes ambientPulse {
     0% {
-        opacity: 0.6;
+        opacity: 0.5;
     }
 
     100% {
@@ -177,7 +344,6 @@ body {
     }
 }
 
-/* Subtle Texture Overlay */
 .grid-overlay {
     position: fixed;
     top: 0;
@@ -187,9 +353,10 @@ body {
     pointer-events: none;
     z-index: 0;
     background-image:
-        radial-gradient(circle at center, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
-    background-size: 40px 40px;
-    opacity: 0.3;
+        linear-gradient(rgba(0, 240, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.4;
 }
 
 /* Container */
@@ -203,17 +370,41 @@ body {
 
 /* Main Content */
 .main-content {
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
-}
-
-.main-content.visible {
     opacity: 1;
     visibility: visible;
 }
 
-/* Lenis Smooth Scroll Coordination */
+/* =============================================
+   UTILITY CLASSES
+   ============================================= */
+
+.glow-text {
+    text-shadow: 0 0 20px var(--glow-cyan), 0 0 40px rgba(0, 240, 255, 0.2);
+}
+
+.glow-text-purple {
+    text-shadow: 0 0 20px var(--glow-purple), 0 0 40px rgba(168, 85, 247, 0.2);
+}
+
+.edge-highlight {
+    position: relative;
+}
+
+.edge-highlight::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+    opacity: 0.5;
+}
+
+/* =============================================
+   LENIS & ACCESSIBILITY
+   ============================================= */
+
 html.lenis,
 html.lenis body {
     height: auto;
@@ -223,15 +414,10 @@ html.lenis body {
     scroll-behavior: auto !important;
 }
 
-.lenis.lenis-smooth [data-lenis-prevent] {
-    overscroll-behavior: contain;
-}
-
 .lenis.lenis-stopped {
     overflow: hidden;
 }
 
-/* Reduced Motion Accessibility */
 @media (prefers-reduced-motion: reduce) {
 
     *,
@@ -243,30 +429,33 @@ html.lenis body {
         scroll-behavior: auto !important;
     }
 
+    .depth-layer-stars,
+    .depth-layer-nebula,
     .sparkle,
-    .ambient-glow,
-    .grid-overlay {
+    .ambient-glow {
         animation: none !important;
     }
 }
 
-/* GPU Acceleration Hints */
+/* GPU Hints */
 .sparkle-field,
 .vignette,
 .ambient-glow,
-.grid-overlay {
+.grid-overlay,
+.depth-layer-stars,
+.depth-layer-nebula {
     will-change: auto;
     transform: translateZ(0);
     backface-visibility: hidden;
 }
 
-/* Selection Styling */
+/* Selection */
 ::selection {
-    background: rgba(138, 43, 226, 0.4);
+    background: rgba(0, 240, 255, 0.3);
     color: var(--text-primary);
 }
 
-/* Scrollbar Styling */
+/* Scrollbar */
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -277,19 +466,19 @@ html.lenis body {
 
 ::-webkit-scrollbar-thumb {
     background: linear-gradient(to bottom,
-            rgba(138, 43, 226, 0.6),
-            rgba(0, 150, 136, 0.4));
+            rgba(0, 240, 255, 0.4),
+            rgba(168, 85, 247, 0.3));
     border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(to bottom,
-            rgba(138, 43, 226, 0.8),
-            rgba(0, 150, 136, 0.6));
+            rgba(0, 240, 255, 0.6),
+            rgba(168, 85, 247, 0.5));
 }
 
-/* Focus Visible for Accessibility */
+/* Focus */
 :focus-visible {
-    outline: 2px solid rgba(138, 43, 226, 0.8);
+    outline: 2px solid var(--neon-cyan);
     outline-offset: 2px;
 }

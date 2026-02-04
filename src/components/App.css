@@ -47,9 +47,8 @@
 .main-content {
     position: relative;
     min-height: 100vh;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+    opacity: 1;
+    visibility: visible;
 }
 
 .main-content.visible {

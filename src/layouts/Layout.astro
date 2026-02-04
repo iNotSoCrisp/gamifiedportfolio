@@ -1,5 +1,13 @@
 ---
 import { ViewTransitions } from "astro:transitions";
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/600.css";
+import "@fontsource/inter/700.css";
+import "@fontsource/jetbrains-mono/400.css";
+import "@fontsource/jetbrains-mono/500.css";
+import "@fontsource/jetbrains-mono/600.css";
+// Keep legacy fonts for simulation page
 import "@fontsource/rajdhani/400.css";
 import "@fontsource/rajdhani/500.css";
 import "@fontsource/rajdhani/600.css";
@@ -18,7 +26,7 @@ export interface Props {
 
 const {
     title,
-    description = "Shubh Arya (Crisp) - Full Stack Developer portfolio with FIFA Ultimate Team inspired design",
+    description = "Shubh Arya (Crisp) - Full Stack Developer & Content Creator portfolio",
 } = Astro.props;
 ---
 
@@ -29,10 +37,16 @@ const {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{title}</title>
         <meta name="description" content={description} />
-        <meta name="theme-color" content="#08080f" />
+        <meta name="theme-color" content="#050810" />
         <ViewTransitions />
     </head>
     <body>
+        <!-- Depth Layers for 3D Background -->
+        <div class="depth-layer-stars"></div>
+        <div class="depth-layer-nebula"></div>
+        <div class="depth-layer-noise"></div>
+        <div class="depth-layer-vignette"></div>
+
         <slot />
     </body>
 </html>

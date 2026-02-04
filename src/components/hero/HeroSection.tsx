@@ -7,6 +7,10 @@ interface Stat {
     tooltip: string;
 }
 
+interface HeroSectionProps {
+    onExplore?: () => void;
+}
+
 const stats: Stat[] = [
     { label: 'JS', value: 90, tooltip: 'JavaScript' },
     { label: 'PY', value: 88, tooltip: 'Python' },
@@ -16,9 +20,10 @@ const stats: Stat[] = [
     { label: 'ND', value: 84, tooltip: 'Node.js' },
 ];
 
-export default function HeroSection() {
+export default function HeroSection({ onExplore }: HeroSectionProps) {
     const [isRevealed, setIsRevealed] = useState(false);
     const [isShaking, setIsShaking] = useState(false);
+    const [showExploreBtn, setShowExploreBtn] = useState(false);
     const [animatedStats, setAnimatedStats] = useState<number[]>(stats.map(() => 0));
     const [animatedRating, setAnimatedRating] = useState(0);
     const cardRef = useRef<HTMLDivElement>(null);
@@ -33,6 +38,11 @@ export default function HeroSection() {
         }
 
         setIsRevealed(true);
+
+        // Show explore button immediately during pack flip
+        setTimeout(() => {
+            setShowExploreBtn(true);
+        }, 400);
 
         // Start shake animation after pack flips
         setTimeout(() => {
@@ -67,6 +77,12 @@ export default function HeroSection() {
         };
 
         requestAnimationFrame(animate);
+    };
+
+    const handleExplore = () => {
+        if (onExplore) {
+            onExplore();
+        }
     };
 
     // 3D Tilt effect
@@ -163,7 +179,7 @@ export default function HeroSection() {
                                         {String(animatedRating).padStart(2, '0')}
                                     </span>
                                 </div>
-                                <div className="position">FSD</div>
+                                <div className="position">POLYMATH</div>
                             </div>
 
                             <div className="player-image-container">
@@ -198,6 +214,14 @@ export default function HeroSection() {
                     </div>
                 </div>
             </div>
+
+            {/* Explore Player Button */}
+            {showExploreBtn && (
+                <button className="explore-btn" onClick={handleExplore}>
+                    <span className="explore-icon">↓</span>
+                    <span className="explore-text">EXPLORE PLAYER</span>
+                </button>
+            )}
 
             <div className="celebration-particles" id="celebrationParticles"></div>
         </section>

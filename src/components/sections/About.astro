@@ -1,188 +1,216 @@
 ---
-
+// Profile Module - Cinematic Floating Panel
 ---
 
-<section class="about-section" id="about">
-    <div class="section-header">
-        <h2 class="section-title">
-            <span class="title-icon">📋</span>
-            PLAYER BIO
-        </h2>
+<section class="profile-section floating-panel" id="profile">
+    <div class="panel-header">
+        <span class="panel-indicator"></span>
+        <span class="panel-label">PROFILE.MODULE</span>
     </div>
-    <div class="about-content">
-        <div class="about-card">
-            <p class="about-text">
-                A passionate Full Stack Developer with a keen eye for building
-                scalable, performant applications. Known in the dev community as <strong
-                    >Crisp</strong
-                >, I bring clean code and creative solutions to every project.
-                With expertise spanning frontend frameworks to backend
-                architecture, I turn complex problems into elegant,
-                user-friendly experiences.
-            </p>
-            <div class="about-highlights">
-                <div class="highlight-item">
-                    <span class="highlight-icon">🎯</span>
-                    <span class="highlight-text">Precision Coder</span>
-                </div>
-                <div class="highlight-item">
-                    <span class="highlight-icon">⚡</span>
-                    <span class="highlight-text">Fast Learner</span>
-                </div>
-                <div class="highlight-item">
-                    <span class="highlight-icon">🔥</span>
-                    <span class="highlight-text">Problem Solver</span>
-                </div>
+
+    <div class="profile-content">
+        <h2 class="profile-title">Operator Profile</h2>
+        <p class="profile-text">
+            A passionate Full Stack Developer with a keen eye for building
+            scalable, performant applications. Known in the dev community as
+            <span class="highlight-name">Crisp</span>, I bring clean code and
+            creative solutions to every project. With expertise spanning
+            frontend frameworks to backend architecture, I turn complex problems
+            into elegant, user-friendly experiences.
+        </p>
+
+        <div class="profile-stats">
+            <div class="stat-module">
+                <span class="stat-glow"></span>
+                <span class="stat-label">Precision</span>
+                <span class="stat-value">OPTIMIZED</span>
+            </div>
+            <div class="stat-module">
+                <span class="stat-glow"></span>
+                <span class="stat-label">Learning</span>
+                <span class="stat-value">ADAPTIVE</span>
+            </div>
+            <div class="stat-module">
+                <span class="stat-glow"></span>
+                <span class="stat-label">Problem Solving</span>
+                <span class="stat-value">ACTIVE</span>
             </div>
         </div>
     </div>
 </section>
 
 <style>
-    /* About Section */
-    .about-section {
-        padding: 80px 20px;
+    .profile-section {
+        padding: var(--panel-padding);
         max-width: 900px;
-        margin: 0 auto;
+        margin: 80px auto;
         opacity: 0;
         transform: translateY(30px);
         transition:
-            opacity 0.8s ease-out,
-            transform 0.8s ease-out;
+            opacity var(--duration-slow) var(--ease-cinematic),
+            transform var(--duration-slow) var(--ease-cinematic);
     }
 
-    .about-section.visible {
+    .profile-section.visible {
         opacity: 1;
         transform: translateY(0);
     }
 
-    .section-header {
-        margin-bottom: 40px;
-        text-align: center;
-    }
-
-    .section-title {
-        font-family: var(--font-display);
-        font-size: 28px;
-        font-weight: 700;
-        letter-spacing: 6px;
-        color: var(--text-primary);
-        display: inline-flex;
-        align-items: center;
-        gap: 16px;
-        padding: 16px 32px;
-        background: rgba(0, 240, 255, 0.05);
-        border: 1px solid rgba(0, 240, 255, 0.2);
-        border-radius: 10px;
-        box-shadow: 0 0 30px rgba(0, 240, 255, 0.1);
-    }
-
-    .title-icon {
-        font-size: 28px;
-    }
-
-    .about-content {
-        position: relative;
-    }
-
-    .about-card {
-        background: linear-gradient(
-            165deg,
-            rgba(8, 8, 18, 0.95) 0%,
-            rgba(5, 5, 12, 0.98) 50%,
-            rgba(8, 12, 15, 0.95) 100%
-        );
-        border: 1px solid rgba(0, 240, 255, 0.15);
-        border-radius: 16px;
-        padding: 40px;
-        backdrop-filter: blur(20px);
-        box-shadow:
-            0 10px 40px rgba(0, 0, 0, 0.5),
-            0 0 60px rgba(0, 240, 255, 0.05),
-            inset 0 1px 0 rgba(255, 255, 255, 0.03);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .about-card::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 1px;
-        background: linear-gradient(
-            90deg,
-            transparent,
-            rgba(0, 240, 255, 0.5),
-            rgba(255, 0, 170, 0.5),
-            transparent
-        );
-    }
-
-    .about-text {
-        font-size: 18px;
-        line-height: 1.8;
-        color: var(--text-secondary);
-        margin-bottom: 30px;
-    }
-
-    .about-text strong {
-        color: var(--neon-cyan);
-        font-weight: 700;
-        text-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
-    }
-
-    .about-highlights {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 20px;
-    }
-
-    .highlight-item {
+    .panel-header {
         display: flex;
         align-items: center;
         gap: 10px;
-        padding: 12px 24px;
-        background: rgba(0, 240, 255, 0.05);
-        border: 1px solid rgba(0, 240, 255, 0.2);
-        border-radius: 50px;
-        transition: all 0.3s ease;
+        margin-bottom: 24px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid var(--border-default);
     }
 
-    .highlight-item:hover {
-        background: rgba(0, 240, 255, 0.1);
-        transform: translateY(-3px);
-        box-shadow:
-            0 8px 25px rgba(0, 240, 255, 0.2),
-            0 0 30px rgba(255, 0, 170, 0.1);
-        border-color: rgba(0, 240, 255, 0.4);
+    .panel-indicator {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--neon-cyan);
+        box-shadow: 0 0 12px var(--neon-cyan);
+        animation: indicatorPulse 2s ease-in-out infinite;
     }
 
-    .highlight-icon {
-        font-size: 20px;
+    @keyframes indicatorPulse {
+        0%,
+        100% {
+            opacity: 1;
+            box-shadow: 0 0 12px var(--neon-cyan);
+        }
+        50% {
+            opacity: 0.6;
+            box-shadow: 0 0 6px var(--neon-cyan);
+        }
     }
 
-    .highlight-text {
-        font-family: var(--font-display);
-        font-size: 12px;
-        font-weight: 600;
+    .panel-label {
+        font-family: var(--font-mono);
+        font-size: 11px;
         letter-spacing: 2px;
+        color: var(--text-muted);
+    }
+
+    .profile-content {
+        padding: 8px 0;
+    }
+
+    .profile-title {
+        font-family: var(--font-display);
+        font-size: 28px;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 20px;
+        letter-spacing: 1px;
+    }
+
+    .profile-text {
+        font-size: 16px;
+        line-height: 1.9;
+        color: var(--text-secondary);
+        margin-bottom: 32px;
+    }
+
+    .highlight-name {
         color: var(--neon-cyan);
+        font-weight: 600;
+        text-shadow: 0 0 20px var(--glow-cyan);
+    }
+
+    .profile-stats {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+
+    .stat-module {
+        flex: 1;
+        min-width: 140px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding: 16px 20px;
+        background: rgba(0, 240, 255, 0.03);
+        border: 1px solid var(--border-default);
+        border-radius: 10px;
+        position: relative;
+        overflow: hidden;
+        transition: all var(--duration-medium) var(--ease-cinematic);
+    }
+
+    .stat-module:hover {
+        border-color: rgba(0, 240, 255, 0.3);
+        background: rgba(0, 240, 255, 0.06);
+        transform: translateY(-2px);
+    }
+
+    .stat-glow {
+        position: absolute;
+        top: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 40px;
+        background: radial-gradient(
+            ellipse,
+            var(--glow-cyan) 0%,
+            transparent 70%
+        );
+        opacity: 0;
+        transition: opacity var(--duration-medium) ease;
+    }
+
+    .stat-module:hover .stat-glow {
+        opacity: 0.5;
+    }
+
+    .stat-label {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 1px;
+        color: var(--text-muted);
+    }
+
+    .stat-value {
+        font-family: var(--font-mono);
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--neon-cyan);
+        text-shadow: 0 0 10px var(--glow-cyan);
     }
 
     @media (max-width: 768px) {
-        .about-card {
-            padding: 25px;
+        .profile-section {
+            margin: 60px 20px;
         }
 
-        .about-text {
-            font-size: 16px;
+        .profile-stats {
+            flex-direction: column;
         }
 
-        .highlight-item {
-            padding: 10px 18px;
+        .stat-module {
+            min-width: 100%;
         }
     }
 </style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const section = document.querySelector(".profile-section");
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                    }
+                });
+            },
+            { threshold: 0.1 },
+        );
+
+        if (section) observer.observe(section);
+    });
+</script>

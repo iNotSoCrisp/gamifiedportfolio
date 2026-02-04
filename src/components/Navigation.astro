@@ -1,0 +1,218 @@
+---
+// Cinematic Sci-Fi Navigation
+---
+
+<nav class="sci-fi-nav">
+    <div class="nav-container">
+        <a href="/" class="nav-logo">
+            <span class="logo-glow"></span>
+            <span class="logo-text">CRISP</span>
+            <span class="logo-suffix">.SYS</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="/#profile" class="nav-link">
+                <span class="link-indicator"></span>
+                Profile
+            </a>
+            <a href="/#capabilities" class="nav-link">
+                <span class="link-indicator"></span>
+                Capabilities
+            </a>
+            <a href="/#dual-ops" class="nav-link">
+                <span class="link-indicator"></span>
+                Dual.Ops
+            </a>
+            <a href="/#comms" class="nav-link">
+                <span class="link-indicator"></span>
+                Comms
+            </a>
+        </div>
+
+        <button class="nav-toggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+</nav>
+
+<style>
+    .sci-fi-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        padding: 12px 0;
+        background: linear-gradient(
+            180deg,
+            rgba(5, 8, 16, 0.95) 0%,
+            rgba(5, 8, 16, 0.8) 70%,
+            transparent 100%
+        );
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+    }
+
+    .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .nav-logo {
+        display: flex;
+        align-items: baseline;
+        text-decoration: none;
+        gap: 2px;
+        position: relative;
+    }
+
+    .logo-glow {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80px;
+        height: 30px;
+        background: radial-gradient(
+            ellipse,
+            rgba(0, 240, 255, 0.2) 0%,
+            transparent 70%
+        );
+        filter: blur(10px);
+        pointer-events: none;
+    }
+
+    .logo-text {
+        font-family: var(--font-display);
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        color: var(--text-primary);
+        position: relative;
+        z-index: 1;
+    }
+
+    .logo-suffix {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        color: var(--neon-cyan);
+        text-shadow: 0 0 10px var(--glow-cyan);
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 8px;
+    }
+
+    .nav-link {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-family: var(--font-mono);
+        font-size: 12px;
+        letter-spacing: 0.5px;
+        color: var(--text-secondary);
+        text-decoration: none;
+        padding: 10px 16px;
+        border-radius: 8px;
+        border: 1px solid transparent;
+        transition: all var(--duration-medium) var(--ease-cinematic);
+        position: relative;
+    }
+
+    .link-indicator {
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: var(--text-muted);
+        transition: all var(--duration-medium) var(--ease-cinematic);
+    }
+
+    .nav-link:hover {
+        color: var(--text-primary);
+        background: rgba(0, 240, 255, 0.05);
+        border-color: rgba(0, 240, 255, 0.2);
+    }
+
+    .nav-link:hover .link-indicator {
+        background: var(--neon-cyan);
+        box-shadow: 0 0 8px var(--neon-cyan);
+    }
+
+    .nav-toggle {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        padding: 10px;
+        background: none;
+        border: 1px solid transparent;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all var(--duration-fast) ease;
+    }
+
+    .nav-toggle span {
+        width: 20px;
+        height: 2px;
+        background: var(--text-secondary);
+        border-radius: 1px;
+        transition: all var(--duration-fast) ease;
+    }
+
+    .nav-toggle:hover {
+        border-color: rgba(0, 240, 255, 0.3);
+    }
+
+    .nav-toggle:hover span {
+        background: var(--neon-cyan);
+    }
+
+    @media (max-width: 768px) {
+        .nav-links {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            flex-direction: column;
+            background: rgba(5, 8, 16, 0.98);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-default);
+            padding: 16px;
+            gap: 4px;
+        }
+
+        .nav-links.open {
+            display: flex;
+        }
+
+        .nav-toggle {
+            display: flex;
+        }
+
+        .nav-link {
+            padding: 14px 16px;
+        }
+    }
+</style>
+
+<script>
+    const toggle = document.querySelector(".nav-toggle");
+    const links = document.querySelector(".nav-links");
+
+    toggle?.addEventListener("click", () => {
+        links?.classList.toggle("open");
+    });
+
+    document.querySelectorAll(".nav-link").forEach((link) => {
+        link.addEventListener("click", () => {
+            links?.classList.remove("open");
+        });
+    });
+</script>

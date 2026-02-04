@@ -1,10 +1,9 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import LandingPage from './landing/LandingPage';
+import { useState, useCallback, useMemo } from 'react';
+import { motion } from 'framer-motion';
 import HeroSection from './hero/HeroSection';
 import './App.css';
 
-// Memoized sparkle component for performance
+// Memoized sparkle component with sci-fi colors
 interface SparkleProps {
     style: React.CSSProperties;
 }
@@ -14,12 +13,12 @@ const Sparkle = ({ style }: SparkleProps) => (
         className="sparkle"
         style={style}
         animate={{
-            opacity: [0, style['--max-opacity' as keyof React.CSSProperties] as number || 0.6, style['--max-opacity' as keyof React.CSSProperties] as number || 0.6, 0],
-            y: [0, -30, -30, 0],
+            opacity: [0, style['--max-opacity' as keyof React.CSSProperties] as number || 0.5, style['--max-opacity' as keyof React.CSSProperties] as number || 0.5, 0],
+            y: [0, -20, -20, 0],
             scale: [0.5, 1, 1, 0.5]
         }}
         transition={{
-            duration: parseFloat(String(style['--duration' as keyof React.CSSProperties] || '8s')),
+            duration: parseFloat(String(style['--duration' as keyof React.CSSProperties] || '10s')),
             repeat: Infinity,
             ease: 'easeInOut',
             delay: parseFloat(String(style.animationDelay || '0s'))
@@ -27,34 +26,23 @@ const Sparkle = ({ style }: SparkleProps) => (
     />
 );
 
-const mainContentVariants = {
-    hidden: {
-        opacity: 0,
-        visibility: 'hidden' as const
-    },
-    visible: {
-        opacity: 1,
-        visibility: 'visible' as const,
-        transition: {
-            duration: 0.5,
-            ease: 'easeOut' as const
-        }
-    }
-};
-
 export default function App() {
-    const [showMain, setShowMain] = useState(false);
-    const [mainVisible, setMainVisible] = useState(false);
+    const [explored, setExplored] = useState(false);
 
-    const handleEnter = useCallback(() => {
-        setShowMain(true);
-        // Make main content visible after a short delay
+    const handleExplore = useCallback(() => {
+        setExplored(true);
+
+        // Show static sections
+        const staticSections = document.getElementById('staticSections');
+        if (staticSections) {
+            staticSections.classList.add('visible');
+        }
+
+        // Scroll to sections after a brief delay
         setTimeout(() => {
-            setMainVisible(true);
-            // Show static sections
             const staticSections = document.getElementById('staticSections');
             if (staticSections) {
-                staticSections.classList.add('visible');
+                staticSections.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
             // Initialize scroll observers for static sections
             initScrollObservers();
@@ -62,7 +50,7 @@ export default function App() {
     }, []);
 
     const initScrollObservers = () => {
-        const sections = document.querySelectorAll('.about-section, .skills-section, .social-section, .projects-section, .experience-section');
+        const sections = document.querySelectorAll('.profile-section, .capabilities-section, .dual-ops-section, .comms-section');
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -75,19 +63,19 @@ export default function App() {
         sections.forEach(section => observer.observe(section));
     };
 
-    // Memoize sparkle data for better performance
+    // Memoize sparkle data with sci-fi color palette
     const sparkles = useMemo(() => {
         const colors = [
-            'rgba(212, 175, 55, 0.7)',  // Gold
-            'rgba(244, 208, 63, 0.6)',  // Light gold
-            'rgba(255, 255, 255, 0.5)', // White
-            'rgba(0, 212, 255, 0.4)',   // Cyan (rare)
+            'rgba(0, 240, 255, 0.6)',    // Neon Cyan
+            'rgba(168, 85, 247, 0.5)',   // Ion Purple
+            'rgba(34, 211, 238, 0.4)',   // Plasma Green
+            'rgba(255, 255, 255, 0.3)',  // White
         ];
 
-        return Array.from({ length: 60 }).map((_, i) => {
+        return Array.from({ length: 50 }).map((_, i) => {
             const color = colors[Math.floor(Math.random() * colors.length)];
-            const size = Math.random() * 4 + 2;
-            const maxOpacity = Math.random() * 0.4 + 0.2;
+            const size = Math.random() * 3 + 1.5;
+            const maxOpacity = Math.random() * 0.3 + 0.15;
 
             return {
                 id: i,
@@ -96,10 +84,10 @@ export default function App() {
                     top: `${Math.random() * 100}%`,
                     width: `${size}px`,
                     height: `${size}px`,
-                    ['--duration' as string]: `${Math.random() * 6 + 6}s`,
+                    ['--duration' as string]: `${Math.random() * 8 + 8}s`,
                     ['--color' as string]: color,
                     ['--max-opacity' as string]: `${maxOpacity}`,
-                    animationDelay: `${Math.random() * 8}s`,
+                    animationDelay: `${Math.random() * 10}s`,
                     background: `radial-gradient(circle, ${color} 0%, transparent 70%)`
                 } as React.CSSProperties
             };
@@ -107,52 +95,37 @@ export default function App() {
     }, []);
 
     return (
-        <>
-            <AnimatePresence mode="wait">
-                {!showMain && <LandingPage onEnter={handleEnter} />}
-            </AnimatePresence>
+        <div className={`main-content ${explored ? 'explored' : ''}`}>
+            {/* Floating Sparkles */}
+            <div className="sparkle-field">
+                {sparkles.map(({ id, style }) => (
+                    <Sparkle key={id} style={style} />
+                ))}
+            </div>
 
-            <AnimatePresence>
-                {showMain && (
-                    <motion.div
-                        className="main-content"
-                        variants={mainContentVariants}
-                        initial="hidden"
-                        animate={mainVisible ? 'visible' : 'hidden'}
-                    >
-                        {/* Floating Sparkles Background */}
-                        <div className="sparkle-field">
-                            {sparkles.map(({ id, style }) => (
-                                <Sparkle key={id} style={style} />
-                            ))}
-                        </div>
+            {/* Ambient Glow - Cinematic Slow */}
+            <motion.div
+                className="ambient-glow"
+                animate={{
+                    opacity: [0.4, 0.8, 0.4]
+                }}
+                transition={{
+                    duration: 12,
+                    repeat: Infinity,
+                    ease: 'easeInOut'
+                }}
+            />
 
-                        {/* Ambient Glow */}
-                        <motion.div
-                            className="ambient-glow"
-                            animate={{
-                                opacity: [0.6, 1, 0.6]
-                            }}
-                            transition={{
-                                duration: 8,
-                                repeat: Infinity,
-                                ease: 'easeInOut'
-                            }}
-                        />
+            {/* Grid Overlay */}
+            <div className="grid-overlay"></div>
 
-                        {/* Grid Overlay */}
-                        <div className="grid-overlay"></div>
+            {/* Vignette */}
+            <div className="vignette"></div>
 
-                        {/* Vignette */}
-                        <div className="vignette"></div>
-
-                        {/* Main Container */}
-                        <main className="container">
-                            <HeroSection />
-                        </main>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </>
+            {/* Main Container - FIFA Pack */}
+            <main className="container">
+                <HeroSection onExplore={handleExplore} />
+            </main>
+        </div>
     );
 }

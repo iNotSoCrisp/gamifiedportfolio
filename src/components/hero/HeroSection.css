@@ -18,9 +18,9 @@
     position: absolute;
     width: 600px;
     height: 600px;
-    border: 1px solid rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(0, 240, 255, 0.08);
     border-radius: 50%;
-    animation: heroRing 8s linear infinite;
+    animation: heroRing 20s linear infinite;
     pointer-events: none;
 }
 
@@ -29,9 +29,9 @@
     position: absolute;
     width: 800px;
     height: 800px;
-    border: 1px dashed rgba(0, 200, 255, 0.05);
+    border: 1px dashed rgba(168, 85, 247, 0.06);
     border-radius: 50%;
-    animation: heroRing 12s linear infinite reverse;
+    animation: heroRing 30s linear infinite reverse;
     pointer-events: none;
 }
 
@@ -701,5 +701,123 @@
 
     .pack-icon {
         font-size: 70px;
+    }
+}
+
+/* =============================================
+   EXPLORE PLAYER BUTTON - SCI-FI STYLE
+   ============================================= */
+
+.explore-btn {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 32px;
+    background: linear-gradient(135deg,
+            rgba(0, 240, 255, 0.12) 0%,
+            rgba(168, 85, 247, 0.1) 100%);
+    border: 1px solid rgba(0, 240, 255, 0.4);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all var(--duration-medium) var(--ease-cinematic);
+    animation: explorePulse 3s ease-in-out infinite, fadeInUp 0.6s var(--ease-cinematic);
+    z-index: 100;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.explore-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 20%;
+    right: 20%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.5), transparent);
+}
+
+.explore-btn:hover {
+    background: linear-gradient(135deg,
+            rgba(0, 240, 255, 0.2) 0%,
+            rgba(168, 85, 247, 0.15) 100%);
+    border-color: rgba(0, 240, 255, 0.7);
+    box-shadow:
+        0 0 40px var(--glow-cyan),
+        0 0 80px var(--glow-purple);
+    transform: translateX(-50%) translateY(-4px);
+}
+
+.explore-btn:active {
+    transform: translateX(-50%) scale(0.98);
+}
+
+.explore-icon {
+    font-size: 18px;
+    color: var(--neon-cyan);
+    animation: bounceDown 2s ease-in-out infinite;
+}
+
+.explore-text {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: var(--neon-cyan);
+    text-shadow: 0 0 15px var(--glow-cyan);
+}
+
+@keyframes explorePulse {
+
+    0%,
+    100% {
+        box-shadow:
+            0 0 20px rgba(0, 240, 255, 0.15),
+            0 0 40px rgba(168, 85, 247, 0.08);
+    }
+
+    50% {
+        box-shadow:
+            0 0 30px rgba(0, 240, 255, 0.25),
+            0 0 60px rgba(168, 85, 247, 0.15);
+    }
+}
+
+@keyframes bounceDown {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(5px);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .explore-btn {
+        bottom: -70px;
+        padding: 14px 28px;
+    }
+
+    .explore-text {
+        font-size: 11px;
+        letter-spacing: 2px;
     }
 }
