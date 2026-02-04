@@ -1,20 +1,27 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import App from '../components/App';
-import About from '../components/sections/About.astro';
-import Skills from '../components/sections/Skills.astro';
-import Social from '../components/sections/Social.astro';
-import Footer from '../components/Footer.astro';
+import Layout from "../layouts/Layout.astro";
+import App from "../components/App";
+import About from "../components/sections/About.astro";
+import Skills from "../components/sections/Skills.astro";
+import TwoSides from "../components/sections/TwoSides.astro";
+import Social from "../components/sections/Social.astro";
+import Footer from "../components/Footer.astro";
+import SectionDivider from "../components/SectionDivider.astro";
 ---
 
-<Layout title="Crisp | Full Stack Developer - FIFA Style Portfolio">
+<Layout title="Crisp | Developer & Content Creator">
     <!-- React App with client-side hydration -->
     <App client:load />
-    
+
     <!-- Static sections rendered server-side (hidden initially, shown after transition) -->
     <div class="static-sections" id="staticSections">
+        <SectionDivider />
         <About />
+        <SectionDivider flip />
         <Skills />
+        <SectionDivider />
+        <TwoSides />
+        <SectionDivider flip />
         <Social />
         <Footer />
     </div>
@@ -24,7 +31,7 @@ import Footer from '../components/Footer.astro';
     .static-sections {
         display: none;
     }
-    
+
     .static-sections.visible {
         display: block;
     }

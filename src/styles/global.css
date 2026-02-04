@@ -1,39 +1,51 @@
 /* =============================================
    FIFA ICONS PORTFOLIO - CSS VARIABLES & RESET
+   DARK AESTHETIC THEME
    ============================================= */
 
-/* CSS Variables - FIFA Theme */
+/* CSS Variables - Ultra Dark Theme */
 :root {
-    /* Gold Gradient Colors */
+    /* Neon Accent Colors */
+    --neon-cyan: #00f0ff;
+    --neon-magenta: #ff00aa;
+    --neon-purple: #8b5cf6;
+    --neon-blue: #3b82f6;
+
+    /* Gold Gradient Colors (preserved for card) */
     --gold-primary: #d4af37;
     --gold-light: #f4d03f;
     --gold-dark: #b8860b;
     --gold-accent: #ffd700;
 
-    /* Cyan Accent for Glow */
-    --cyan-glow: rgba(0, 200, 255, 0.12);
-    --cyan-accent: #00d4ff;
+    /* Glow Effects */
+    --cyan-glow: rgba(0, 240, 255, 0.15);
+    --magenta-glow: rgba(255, 0, 170, 0.12);
+    --cyan-accent: #00f0ff;
 
     /* Icons Card Colors */
-    --card-bg-start: #1a1a2e;
-    --card-bg-end: #0f0f1a;
+    --card-bg-start: #0a0a12;
+    --card-bg-end: #050508;
     --card-border: linear-gradient(135deg, #d4af37 0%, #f4e4ba 25%, #d4af37 50%, #b8860b 75%, #d4af37 100%);
 
-    /* Background Colors - FIFA Stadium Theme */
-    --bg-primary: #08080f;
-    --bg-secondary: #0c0c16;
-    --bg-tertiary: #101020;
-    --bg-card: rgba(15, 15, 30, 0.85);
+    /* Background Colors - Ultra Dark */
+    --bg-primary: #030305;
+    --bg-secondary: #050508;
+    --bg-tertiary: #08080d;
+    --bg-card: rgba(8, 8, 15, 0.92);
+    --bg-card-hover: rgba(12, 12, 22, 0.95);
 
     /* Text Colors */
     --text-primary: #ffffff;
-    --text-secondary: #a0a0b8;
+    --text-secondary: #8a8aa3;
+    --text-accent: #00f0ff;
     --text-gold: #d4af37;
 
     /* Glow Colors */
+    --glow-primary: rgba(0, 240, 255, 0.4);
+    --glow-secondary: rgba(255, 0, 170, 0.3);
     --glow-gold: rgba(212, 175, 55, 0.5);
-    --glow-white: rgba(255, 255, 255, 0.2);
-    --glow-spotlight: rgba(255, 248, 220, 0.08);
+    --glow-white: rgba(255, 255, 255, 0.1);
+    --glow-spotlight: rgba(0, 240, 255, 0.06);
 
     /* Fonts */
     --font-primary: 'Rajdhani', sans-serif;
@@ -199,4 +211,85 @@ body {
 .main-content.visible {
     opacity: 1;
     visibility: visible;
+}
+
+/* Lenis Smooth Scroll Coordination */
+html.lenis,
+html.lenis body {
+    height: auto;
+}
+
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+
+/* Reduced Motion Accessibility */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .sparkle,
+    .ambient-glow,
+    .grid-overlay {
+        animation: none !important;
+    }
+}
+
+/* GPU Acceleration Hints */
+.sparkle-field,
+.vignette,
+.ambient-glow,
+.grid-overlay {
+    will-change: auto;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* Selection Styling */
+::selection {
+    background: rgba(138, 43, 226, 0.4);
+    color: var(--text-primary);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom,
+            rgba(138, 43, 226, 0.6),
+            rgba(0, 150, 136, 0.4));
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom,
+            rgba(138, 43, 226, 0.8),
+            rgba(0, 150, 136, 0.6));
+}
+
+/* Focus Visible for Accessibility */
+:focus-visible {
+    outline: 2px solid rgba(138, 43, 226, 0.8);
+    outline-offset: 2px;
 }

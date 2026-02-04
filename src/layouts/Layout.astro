@@ -1,28 +1,67 @@
 ---
+import { ViewTransitions } from "astro:transitions";
+import "@fontsource/rajdhani/400.css";
+import "@fontsource/rajdhani/500.css";
+import "@fontsource/rajdhani/600.css";
+import "@fontsource/rajdhani/700.css";
+import "@fontsource/orbitron/400.css";
+import "@fontsource/orbitron/500.css";
+import "@fontsource/orbitron/600.css";
+import "@fontsource/orbitron/700.css";
+import "@fontsource/orbitron/800.css";
+import "@fontsource/orbitron/900.css";
+
 export interface Props {
     title: string;
     description?: string;
 }
 
-const { title, description = "Shubh Arya (Crisp) - Full Stack Developer portfolio with FIFA Ultimate Team inspired design" } = Astro.props;
+const {
+    title,
+    description = "Shubh Arya (Crisp) - Full Stack Developer portfolio with FIFA Ultimate Team inspired design",
+} = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{title}</title>
-    <meta name="description" content={description}>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-</head>
-<body>
-    <slot />
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <meta name="theme-color" content="#08080f" />
+        <ViewTransitions />
+    </head>
+    <body>
+        <slot />
+    </body>
 </html>
 
 <style is:global>
-    @import '../styles/global.css';
+    @import "../styles/global.css";
 </style>
+
+<script>
+    // Initialize Lenis smooth scroll
+    import Lenis from "lenis";
+
+    const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        orientation: "vertical",
+        gestureOrientation: "vertical",
+        smoothWheel: true,
+        wheelMultiplier: 1,
+        touchMultiplier: 2,
+    });
+
+    function raf(time: number) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    // Make lenis available globally for other components
+    (window as any).lenis = lenis;
+</script>

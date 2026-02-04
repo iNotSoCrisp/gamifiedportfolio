@@ -42,7 +42,6 @@ export default function HeroSection() {
             setTimeout(() => {
                 setIsShaking(false);
                 animateStats();
-                createCelebrationParticles();
             }, 600);
         }, 800);
     }, [isRevealed]);
@@ -68,63 +67,6 @@ export default function HeroSection() {
         };
 
         requestAnimationFrame(animate);
-    };
-
-    const createCelebrationParticles = () => {
-        const container = document.getElementById('celebrationParticles');
-        if (!container) return;
-
-        const colors = ['#d4af37', '#f4d03f', '#ffd700', '#b8860b', '#ffffff'];
-
-        for (let i = 0; i < 60; i++) {
-            setTimeout(() => {
-                const particle = document.createElement('div');
-                particle.className = 'celebration-particle';
-
-                const color = colors[Math.floor(Math.random() * colors.length)];
-                const size = Math.random() * 15 + 5;
-
-                particle.style.background = color;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.left = `${window.innerWidth / 2}px`;
-                particle.style.top = `${window.innerHeight / 2}px`;
-
-                container.appendChild(particle);
-
-                // Animate with physics
-                const angle = Math.random() * Math.PI * 2;
-                const velocity = Math.random() * 300 + 200;
-                const dx = Math.cos(angle) * velocity;
-                let dy = Math.sin(angle) * velocity - 200;
-                let x = 0, y = 0;
-                const gravity = 400;
-                const startTime = performance.now();
-                const duration = 2000;
-
-                const animateParticle = (currentTime: number) => {
-                    const elapsed = (currentTime - startTime) / 1000;
-
-                    if (elapsed > duration / 1000) {
-                        particle.remove();
-                        return;
-                    }
-
-                    x = dx * elapsed;
-                    dy += gravity * 0.016;
-                    y += dy * 0.016;
-
-                    const opacity = 1 - (elapsed / (duration / 1000));
-
-                    particle.style.transform = `translate(${x}px, ${y}px) rotate(${elapsed * 360}deg)`;
-                    particle.style.opacity = String(opacity);
-
-                    requestAnimationFrame(animateParticle);
-                };
-
-                requestAnimationFrame(animateParticle);
-            }, i * 20);
-        }
     };
 
     // 3D Tilt effect

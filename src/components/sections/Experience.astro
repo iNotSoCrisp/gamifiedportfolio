@@ -1,0 +1,389 @@
+---
+interface Experience {
+    company: string;
+    role: string;
+    period: string;
+    duration: string;
+    achievements: string[];
+    icon: string;
+    color: string;
+}
+
+const experiences: Experience[] = [
+    {
+        company: "Tech Innovators Inc",
+        role: "Senior Full Stack Developer",
+        period: "2023 - Present",
+        duration: "1+ years",
+        achievements: [
+            "Led development of microservices architecture serving 1M+ users",
+            "Implemented CI/CD pipelines reducing deployment time by 60%",
+            "Mentored junior developers and conducted code reviews",
+        ],
+        icon: "🏆",
+        color: "rgba(255, 215, 0, 0.8)",
+    },
+    {
+        company: "Digital Solutions Co",
+        role: "Full Stack Developer",
+        period: "2021 - 2023",
+        duration: "2 years",
+        achievements: [
+            "Built real-time dashboard with WebSocket integration",
+            "Optimized database queries improving performance by 40%",
+            "Developed REST APIs handling 10K+ requests per minute",
+        ],
+        icon: "🥈",
+        color: "rgba(192, 192, 192, 0.8)",
+    },
+    {
+        company: "StartUp Ventures",
+        role: "Junior Developer",
+        period: "2020 - 2021",
+        duration: "1 year",
+        achievements: [
+            "Contributed to React Native mobile application",
+            "Implemented responsive UI components with modern CSS",
+            "Participated in agile development sprints",
+        ],
+        icon: "🥉",
+        color: "rgba(205, 127, 50, 0.8)",
+    },
+];
+---
+
+<section class="experience-section" id="experience">
+    <div class="section-header">
+        <h2 class="section-title">
+            <span class="title-icon">🏅</span>
+            SEASON HIGHLIGHTS
+        </h2>
+        <p class="section-subtitle">Career Journey & Achievements</p>
+    </div>
+
+    <div class="timeline">
+        <div class="timeline-line"></div>
+
+        {
+            experiences.map((exp, index) => (
+                <article
+                    class="experience-card"
+                    style={`--delay: ${index * 0.2}s; --accent-color: ${exp.color}`}
+                >
+                    <div class="timeline-marker">
+                        <span class="marker-icon">{exp.icon}</span>
+                    </div>
+
+                    <div class="experience-content">
+                        <div class="experience-header">
+                            <div class="company-info">
+                                <h3 class="company-name">{exp.company}</h3>
+                                <span class="role-title">{exp.role}</span>
+                            </div>
+                            <div class="period-info">
+                                <span class="period">{exp.period}</span>
+                                <span class="duration">{exp.duration}</span>
+                            </div>
+                        </div>
+
+                        <ul class="achievements-list">
+                            {exp.achievements.map((achievement) => (
+                                <li class="achievement-item">
+                                    <span class="achievement-bullet">▸</span>
+                                    {achievement}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </article>
+            ))
+        }
+    </div>
+</section>
+
+<style>
+    .experience-section {
+        padding: 80px 20px;
+        max-width: 900px;
+        margin: 0 auto;
+        opacity: 0;
+        transform: translateY(30px);
+        transition:
+            opacity 0.8s ease-out,
+            transform 0.8s ease-out;
+    }
+
+    .experience-section.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .section-header {
+        margin-bottom: 50px;
+        text-align: center;
+    }
+
+    .section-title {
+        font-family: var(--font-display);
+        font-size: 28px;
+        font-weight: 700;
+        letter-spacing: 6px;
+        color: var(--text-primary);
+        display: inline-flex;
+        align-items: center;
+        gap: 16px;
+        padding: 16px 32px;
+        background: rgba(0, 240, 255, 0.05);
+        border: 1px solid rgba(0, 240, 255, 0.2);
+        border-radius: 10px;
+        margin-bottom: 12px;
+        box-shadow: 0 0 30px rgba(0, 240, 255, 0.1);
+    }
+
+    .title-icon {
+        font-size: 28px;
+    }
+
+    .section-subtitle {
+        font-family: var(--font-primary);
+        font-size: 14px;
+        color: var(--text-secondary);
+        letter-spacing: 2px;
+    }
+
+    .timeline {
+        position: relative;
+        padding-left: 60px;
+    }
+
+    .timeline-line {
+        position: absolute;
+        left: 24px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(
+            to bottom,
+            var(--neon-cyan) 0%,
+            var(--neon-magenta) 100%
+        );
+        opacity: 0;
+        transform: scaleY(0);
+        transform-origin: top;
+        transition:
+            opacity 0.5s ease,
+            transform 1s ease;
+        box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+    }
+
+    .experience-section.visible .timeline-line {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+
+    .experience-card {
+        position: relative;
+        margin-bottom: 40px;
+        opacity: 0;
+        transform: translateX(-30px);
+        transition: all 0.6s ease-out;
+        transition-delay: var(--delay, 0s);
+    }
+
+    .experience-section.visible .experience-card {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .timeline-marker {
+        position: absolute;
+        left: -60px;
+        top: 20px;
+        width: 48px;
+        height: 48px;
+        background: linear-gradient(
+            135deg,
+            rgba(8, 8, 15, 0.95) 0%,
+            rgba(5, 5, 10, 1) 100%
+        );
+        border: 2px solid var(--accent-color, var(--neon-cyan));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow:
+            0 0 25px rgba(0, 240, 255, 0.3),
+            0 4px 20px rgba(0, 0, 0, 0.5);
+        z-index: 2;
+    }
+
+    .marker-icon {
+        font-size: 24px;
+    }
+
+    .experience-content {
+        background: linear-gradient(
+            165deg,
+            rgba(8, 8, 18, 0.95) 0%,
+            rgba(5, 5, 12, 0.98) 50%,
+            rgba(8, 12, 15, 0.95) 100%
+        );
+        border: 1px solid rgba(0, 240, 255, 0.12);
+        border-left: 3px solid var(--accent-color, var(--neon-cyan));
+        border-radius: 12px;
+        padding: 24px;
+        backdrop-filter: blur(20px);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .experience-content::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+            90deg,
+            var(--accent-color, var(--neon-cyan)),
+            transparent 50%
+        );
+    }
+
+    .experience-card:hover .experience-content {
+        transform: translateX(8px);
+        border-color: rgba(0, 240, 255, 0.3);
+        box-shadow: 0 15px 50px rgba(0, 240, 255, 0.1);
+    }
+
+    .experience-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .company-info {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .company-name {
+        font-family: var(--font-display);
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--text-primary);
+        letter-spacing: 1px;
+    }
+
+    .role-title {
+        font-family: var(--font-primary);
+        font-size: 14px;
+        color: var(--neon-cyan);
+        font-weight: 600;
+    }
+
+    .period-info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 4px;
+    }
+
+    .period {
+        font-family: var(--font-display);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        color: var(--text-secondary);
+    }
+
+    .duration {
+        font-family: var(--font-primary);
+        font-size: 11px;
+        color: rgba(0, 200, 100, 0.8);
+        padding: 2px 10px;
+        background: rgba(0, 200, 100, 0.1);
+        border-radius: 10px;
+    }
+
+    .achievements-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .achievement-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-family: var(--font-primary);
+        font-size: 14px;
+        line-height: 1.6;
+        color: var(--text-secondary);
+    }
+
+    .achievement-bullet {
+        color: var(--neon-magenta);
+        font-size: 12px;
+        margin-top: 2px;
+    }
+
+    @media (max-width: 768px) {
+        .timeline {
+            padding-left: 50px;
+        }
+
+        .timeline-marker {
+            left: -50px;
+            width: 40px;
+            height: 40px;
+        }
+
+        .marker-icon {
+            font-size: 20px;
+        }
+
+        .experience-header {
+            flex-direction: column;
+        }
+
+        .period-info {
+            align-items: flex-start;
+        }
+
+        .experience-content {
+            padding: 20px;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const experienceSection = document.querySelector(".experience-section");
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                    }
+                });
+            },
+            { threshold: 0.1 },
+        );
+
+        if (experienceSection) {
+            observer.observe(experienceSection);
+        }
+    });
+</script>
