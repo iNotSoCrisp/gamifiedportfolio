@@ -7,3 +7,4 @@ import react from '@astrojs/react';
 export default defineConfig({
   integrations: [react()]
 });
+// formatting 1
