@@ -8,3 +8,4 @@ export default defineConfig({
   integrations: [react()]
 });
 // formatting 1
+// config formatting 2
