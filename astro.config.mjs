@@ -30,3 +30,4 @@ export default defineConfig({
 // config formatting 25
 // config formatting 27
 // config formatting 30
+// config formatting 32
